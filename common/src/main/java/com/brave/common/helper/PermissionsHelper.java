@@ -9,9 +9,9 @@ import android.os.Build;
 import com.brave.common.CommonConfig;
 
 /**
- * Creator : Fountain Tao<br/>
- * Creation Time : 2017/12/8<br/>
- * Description : Manifest管理器<br/>
+ * <b>author</b> ： brave tou <br/>
+ * <b>createTime</b> ： 2018/6/9 <br/>
+ * <b>description</b> ： Permissions 帮助类
  */
 public class PermissionsHelper {
     private Context mContext;
