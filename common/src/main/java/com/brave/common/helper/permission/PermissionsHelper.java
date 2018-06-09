@@ -1,12 +1,10 @@
-package com.brave.common.helper;
+package com.brave.common.helper.permission;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
-import com.brave.common.CommonConfig;
+import com.brave.common.base.CommonApplication;
 
 /**
  * <b>author</b> ： brave tou <br/>
@@ -14,7 +12,7 @@ import com.brave.common.CommonConfig;
  * <b>description</b> ： Permissions 帮助类
  */
 public class PermissionsHelper {
-    private Context mContext;
+    private Context context;
 
     private static class SingletonHolder {
         private volatile static PermissionsHelper mInstance = new PermissionsHelper();
@@ -25,13 +23,23 @@ public class PermissionsHelper {
     }
 
     private PermissionsHelper() {
-        mContext = CommonConfig.getInstance().getContext();
     }
 
-    /*public PermissionsHelper with(Activity activity) {
-        this.activity = activity;
-        return getInstance();
-    }*/
+    private Context getContext() {
+        if (null != context) {
+            return context;
+        }
+        return CommonApplication.getContext();
+    }
+
+    /**
+     * 如果调用此方法则 {@link #getContext()} 中使用的 {@link CommonApplication#getContext()} 失效<br/>
+     * 如需再次使用 {@link CommonApplication#getContext()} 需要置空 null
+     */
+    public PermissionsHelper with(Context context) {
+        this.context = context;
+        return this;
+    }
 
     /**
      * 是否需要动态注册权限
@@ -46,17 +54,16 @@ public class PermissionsHelper {
     }
 
     /**
-     * 检测权限是否已注册
+     * 是否已拥有权限
      *
-     * @return true ： 已注册 <br/> false ： 反之
+     * @return true ： 已拥有 <br/> false ： 反之
      */
-    @TargetApi(Build.VERSION_CODES.M)
-    public boolean isRegistered(String... permissions) {
-        if (isNeedRegister()) {
+    public boolean hasPermissions(String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int count = null == permissions ? 0 : permissions.length;
             for (int i = 0; i < count; i++) {
                 // 检测 您 是否 开启了权限
-                if (mContext.checkSelfPermission(permissions[i]) != PackageManager.PERMISSION_GRANTED) {
+                if (getContext().checkSelfPermission(permissions[i]) != PackageManager.PERMISSION_GRANTED) {
                     return false;
                 }
             }
@@ -65,11 +72,11 @@ public class PermissionsHelper {
     }
 
     /**
-     * 检测权限是否已注册
+     * 是否已拥有权限
      *
-     * @return true ： 已注册 <br/> false ： 反之
+     * @return true ： 已拥有 <br/> false ： 反之
      */
-    public boolean isRegistered(int... grantResults) {
+    public boolean hasPermissions(int... grantResults) {
         int count = null == grantResults ? 0 : grantResults.length;
         for (int i = 0; i < count; i++) {
             if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
@@ -77,15 +84,5 @@ public class PermissionsHelper {
             }
         }
         return true;
-    }
-
-    /**
-     * 动态请求权限
-     */
-    @TargetApi(Build.VERSION_CODES.M)
-    public void requestPermissions(Activity activity, String... permissions) {
-        if (isNeedRegister()) {
-            activity.requestPermissions(permissions, CommonConfig.getInstance().getPermissionRequestCode());
-        }
     }
 }

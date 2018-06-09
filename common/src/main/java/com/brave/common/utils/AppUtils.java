@@ -7,7 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 
-import com.brave.common.CommonConfig;
+import com.brave.common.base.CommonApplication;
 
 /**
  * <b>author</b> ： brave tou <br/>
@@ -15,7 +15,7 @@ import com.brave.common.CommonConfig;
  * <b>description</b> ： APP 工具类
  */
 public class AppUtils {
-    private Context mContext;
+    private Context context;
 
     private static class SingletonHolder {
         private volatile static AppUtils mInstance = new AppUtils();
@@ -26,22 +26,32 @@ public class AppUtils {
     }
 
     private AppUtils() {
-        mContext = CommonConfig.getInstance().getContext();
     }
 
-    /*public AppUtils with(Context mContext) {
-        this.mContext = mContext;
-        return getInstance();
-    }*/
+    private Context getContext() {
+        if (null != context) {
+            return context;
+        }
+        return CommonApplication.getContext();
+    }
+
+    /**
+     * 如果调用此方法则 {@link #getContext()} 中使用的 {@link CommonApplication#getContext()} 失效<br/>
+     * 如需再次使用 {@link CommonApplication#getContext()} 需要置空 null
+     */
+    public AppUtils with(Context context) {
+        this.context = context;
+        return this;
+    }
 
     /**
      * 获取 PackageInfo 对象
      */
     public PackageInfo getPackageInfo() {
         try {
-            PackageManager packageManager = mContext.getPackageManager();
+            PackageManager packageManager = getContext().getPackageManager();
             return packageManager.getPackageInfo(
-                    mContext.getPackageName(), 0);
+                    getContext().getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -53,7 +63,7 @@ public class AppUtils {
      */
     public String getAppName() {
         PackageInfo packageInfo = getPackageInfo();
-        return null == packageInfo ? null : mContext.getResources().getString(
+        return null == packageInfo ? null : getContext().getResources().getString(
                 packageInfo.applicationInfo.labelRes);
     }
 
@@ -91,7 +101,7 @@ public class AppUtils {
      * 获取 PackageManager 对象
      */
     private TelephonyManager getTelephonyManager() {
-        return (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+        return (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
     }
 
     /**
