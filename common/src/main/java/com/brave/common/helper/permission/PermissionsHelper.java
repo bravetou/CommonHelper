@@ -85,4 +85,11 @@ public class PermissionsHelper {
         }
         return true;
     }
+
+    /**
+     * 新建权限请求类
+     */
+    public PermissionsRequest getPermissionsRequest() {
+        return PermissionsRequest.newInstance();
+    }
 }

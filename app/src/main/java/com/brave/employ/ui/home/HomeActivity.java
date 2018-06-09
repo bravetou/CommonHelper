@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.brave.common.helper.permission.PermissionRequest;
+import com.brave.common.helper.permission.PermissionsRequest;
 import com.brave.common.helper.permission.PermissionsHelper;
 import com.brave.common.utils.AppUtils;
 import com.brave.employ.R;
@@ -36,7 +36,7 @@ public class HomeActivity extends FragmentActivity {
             boolean hasPermissions = PermissionsHelper.getInstance().hasPermissions(Manifest.permission.READ_PHONE_STATE);
             Log.d(TAG, "onCreate: " + hasPermissions);
             if (!hasPermissions) {
-                PermissionRequest execute = PermissionRequest.newInstance()
+                PermissionsRequest execute = PermissionsRequest.newInstance()
                         .with(this)
                         .setRequestCode(521)
                         .addPermissions(Manifest.permission.READ_PHONE_STATE
