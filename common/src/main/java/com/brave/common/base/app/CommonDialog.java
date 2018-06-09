@@ -89,7 +89,7 @@ public abstract class CommonDialog<B extends CommonDialog.DialogBuilder> extends
         // getPackageName() => com.brave.common.base.app
         // getClass().getName() => com.brave.common.base.app.CommonDialog
         // getClass().getSimpleName() => CommonDialog
-        String tag = activity.getClass().getName() + "$$$" + getClass().getSimpleName();
+        String tag = activity.getClass().getName() + "$$$" + getClass().getSimpleName(); // com.brave.employ.ui.home.HomeActivity$$$TestDialog
         show(manager, tag);
     }
 

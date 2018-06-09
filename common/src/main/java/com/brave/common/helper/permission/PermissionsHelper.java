@@ -9,7 +9,7 @@ import com.brave.common.base.CommonApplication;
 /**
  * <b>author</b> ： brave tou <br/>
  * <b>createTime</b> ： 2018/6/9 <br/>
- * <b>description</b> ： Permissions 帮助类
+ * <b>description</b> ： Permissions 管理帮助类
  */
 public class PermissionsHelper {
     private Context context;

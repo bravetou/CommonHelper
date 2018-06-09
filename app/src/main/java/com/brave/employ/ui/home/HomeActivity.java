@@ -1,14 +1,9 @@
 package com.brave.employ.ui.home;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
-import com.brave.common.helper.permission.PermissionsRequest;
-import com.brave.common.helper.permission.PermissionsHelper;
-import com.brave.common.utils.AppUtils;
 import com.brave.employ.R;
 
 /**
@@ -29,25 +24,28 @@ public class HomeActivity extends FragmentActivity {
     protected void onStart() {
         super.onStart();
 
-        Log.d(TAG, "onCreate: " + AppUtils.getInstance().getVersionCode());
-        Log.d(TAG, "onCreate: " + AppUtils.getInstance().getVersionName());
-
-        if (PermissionsHelper.getInstance().isNeedRegister()) {
-            boolean hasPermissions = PermissionsHelper.getInstance().hasPermissions(Manifest.permission.READ_PHONE_STATE);
-            Log.d(TAG, "onCreate: " + hasPermissions);
-            if (!hasPermissions) {
-                PermissionsRequest execute = PermissionsRequest.newInstance()
-                        .with(this)
-                        .setRequestCode(521)
-                        .addPermissions(Manifest.permission.READ_PHONE_STATE
-                        )
-                        .execute();
-                String[] permissions = execute.getPermissions();
-                for (String permission : permissions) {
-                    Log.d(TAG, "onCreate: " + permission);
-                }
-                Log.d(TAG, "onCreate: " + execute.getRequestCode());
-            }
-        }
+        //Log.d(TAG, "onCreate: " + AppUtils.getInstance().getVersionCode());
+        //Log.d(TAG, "onCreate: " + AppUtils.getInstance().getVersionName());
+        //
+        //if (PermissionsHelper.getInstance().isNeedRegister()) {
+        //    boolean hasPermissions = PermissionsHelper.getInstance().hasPermissions(Manifest.permission.READ_PHONE_STATE);
+        //    Log.d(TAG, "onCreate: " + hasPermissions);
+        //    if (!hasPermissions) {
+        //        PermissionsRequest execute = PermissionsRequest.newInstance()
+        //                .with(this)
+        //                .setRequestCode(521)
+        //                .addPermissions(Manifest.permission.READ_PHONE_STATE
+        //                )
+        //                .execute();
+        //        String[] permissions = execute.getPermissions();
+        //        for (String permission : permissions) {
+        //            Log.d(TAG, "onCreate: " + permission);
+        //        }
+        //        Log.d(TAG, "onCreate: " + execute.getRequestCode());
+        //    }
+        //}
+        //
+        //new TestDialog.Builder(this)
+        //        .show();
     }
 }

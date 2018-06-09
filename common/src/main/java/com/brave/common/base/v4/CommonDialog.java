@@ -12,6 +12,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +91,7 @@ public abstract class CommonDialog<B extends CommonDialog.DialogBuilder> extends
         // getPackageName() => com.brave.common.base.v4
         // getClass().getName() => com.brave.common.base.v4.CommonDialog
         // getClass().getSimpleName() => CommonDialog
-        String tag = activity.getClass().getName() + "$$" + getClass().getSimpleName();
+        String tag = activity.getClass().getName() + "$$" + getClass().getSimpleName(); // com.brave.employ.ui.home.HomeActivity$$TestDialog
         show(manager, tag);
     }
 
