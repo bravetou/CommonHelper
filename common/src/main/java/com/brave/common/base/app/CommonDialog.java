@@ -25,9 +25,11 @@ import com.brave.common.utils.ViewCommonUtils;
  */
 public abstract class CommonDialog<B extends CommonDialog.DialogBuilder> extends DialogFragment {
     protected Activity activity;
+    protected boolean cancelable;
 
     public CommonDialog(B builder) {
         this.activity = builder.activity;
+        this.cancelable = builder.cancelable;
     }
 
     @Override
@@ -99,6 +101,7 @@ public abstract class CommonDialog<B extends CommonDialog.DialogBuilder> extends
 
     public static class DialogBuilder {
         protected Activity activity;
+        protected boolean cancelable;
 
         public DialogBuilder(Activity activity) {
             this.activity = activity;

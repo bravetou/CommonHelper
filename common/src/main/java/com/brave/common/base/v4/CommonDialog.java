@@ -12,7 +12,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +26,11 @@ import com.brave.common.utils.ViewCommonUtils;
  */
 public abstract class CommonDialog<B extends CommonDialog.DialogBuilder> extends DialogFragment {
     protected FragmentActivity activity;
+    protected boolean cancelable;
 
     protected CommonDialog(B builder) {
         this.activity = builder.activity;
+        this.cancelable = builder.cancelable;
     }
 
     @Override
@@ -101,6 +102,7 @@ public abstract class CommonDialog<B extends CommonDialog.DialogBuilder> extends
 
     public static class DialogBuilder {
         protected FragmentActivity activity;
+        protected boolean cancelable;
 
         public DialogBuilder(FragmentActivity activity) {
             this.activity = activity;
