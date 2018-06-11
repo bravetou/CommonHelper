@@ -183,7 +183,8 @@ public final class ScreenUtils {
 
     /**
      * 设置指定 Activity 的屏幕为全屏<br/>
-     * 需在 {@link Activity#setContentView(int)} 之前调用
+     * 需在 {@link Activity#setContentView(int)} 之前调用<br/>
+     * 否则 ： AndroidRuntimeException ： requestFeature() must be called before adding content
      */
     public static void setFullScreen(@NonNull Activity activity) {
         activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -267,7 +268,9 @@ public final class ScreenUtils {
     }
 
     /**
-     * 设置进入休眠时长
+     * 设置进入休眠时长<br/>
+     * 必须加入 permission: android.permission.WRITE_SETTINGS 权限<br/>
+     * 否则： SecurityException: com.brave.employ.debug was not granted  this permission: android.permission.WRITE_SETTINGS.
      */
     public static void setSleepTime(int duration) {
         Settings.System.putInt(getContext().getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, duration);
