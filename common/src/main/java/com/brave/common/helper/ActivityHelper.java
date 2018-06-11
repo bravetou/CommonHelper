@@ -29,6 +29,17 @@ public class ActivityHelper {
     }
 
     /**
+     * 获取栈顶Activity（即：运行着的Activity）
+     */
+    public Activity getStackTopActivity() {
+        int count = null == aList ? 0 : aList.size();
+        if (count <= 0) {
+            return null;
+        }
+        return aList.get(count - 1);
+    }
+
+    /**
      * 是否存在该 Activity
      */
     public boolean hasActivity(Activity activity) {

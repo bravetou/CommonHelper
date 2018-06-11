@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
-import com.brave.common.base.CommonApplication;
+import com.brave.common.CommonConfig;
 
 /**
  * <b>author</b> ： brave tou <br/>
@@ -29,12 +29,12 @@ public class PermissionsHelper {
         if (null != context) {
             return context;
         }
-        return CommonApplication.getContext();
+        return CommonConfig.getInstance().getContext();
     }
 
     /**
-     * 如果调用此方法则 {@link #getContext()} 中使用的 {@link CommonApplication#getContext()} 失效<br/>
-     * 如需再次使用 {@link CommonApplication#getContext()} 需要置空 null
+     * 如果调用此方法则 {@link #getContext()} 中使用的 {@link CommonConfig#getContext()} 失效<br/>
+     * 如需再次使用 {@link CommonConfig#getContext()} 需要置空 null
      */
     public PermissionsHelper with(Context context) {
         this.context = context;

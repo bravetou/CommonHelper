@@ -7,7 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Parcelable;
 
-import com.brave.common.base.CommonApplication;
+import com.brave.common.CommonConfig;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
@@ -39,7 +39,7 @@ public class BroadCastHelper {
     }
 
     public Context getContext() {
-        return CommonApplication.getContext();
+        return CommonConfig.getInstance().getContext();
     }
 
     /**
