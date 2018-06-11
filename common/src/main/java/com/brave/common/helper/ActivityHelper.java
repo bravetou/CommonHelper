@@ -29,6 +29,13 @@ public class ActivityHelper {
     }
 
     /**
+     * 获取栈内所有 Activity
+     */
+    public List<Activity> getStackActivitys() {
+        return aList;
+    }
+
+    /**
      * 获取栈顶Activity（即：运行着的Activity）
      */
     public Activity getStackTopActivity() {
