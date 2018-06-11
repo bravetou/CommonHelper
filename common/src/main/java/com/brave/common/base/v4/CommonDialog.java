@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.brave.common.base.DialogBuilder;
 import com.brave.common.utils.ViewCommonUtils;
 
 /**
@@ -24,13 +25,20 @@ import com.brave.common.utils.ViewCommonUtils;
  * <b>createTime</b> ： 2018/6/8 <br/>
  * <b>description</b> ：v4 下常用 Dialog
  */
-public abstract class CommonDialog<B extends CommonDialog.DialogBuilder> extends DialogFragment {
+public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragment {
     protected FragmentActivity activity;
     protected boolean cancelable;
 
     protected CommonDialog(B builder) {
-        this.activity = builder.activity;
-        this.cancelable = builder.cancelable;
+        if (null == builder.getActivity()) {
+            throw new RuntimeException("null pointer.");
+        }
+        if (builder.getActivity() instanceof FragmentActivity) {
+            this.activity = (FragmentActivity) builder.getActivity();
+        } else {
+            throw new RuntimeException("Class please inherit to FragmentActivity.");
+        }
+        this.cancelable = builder.isCancelable();
     }
 
     @Override
@@ -98,15 +106,6 @@ public abstract class CommonDialog<B extends CommonDialog.DialogBuilder> extends
 
     public void show() {
         show(activity.getSupportFragmentManager());
-    }
-
-    public static class DialogBuilder {
-        protected FragmentActivity activity;
-        protected boolean cancelable;
-
-        public DialogBuilder(FragmentActivity activity) {
-            this.activity = activity;
-        }
     }
 
     protected ViewCommonUtils getViewCommonUtils() {

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.brave.common.base.DialogBuilder;
 import com.brave.common.utils.ViewCommonUtils;
 
 /**
@@ -23,13 +24,16 @@ import com.brave.common.utils.ViewCommonUtils;
  * <b>createTime</b> ： 2018/6/8 <br/>
  * <b>description</b> ：app 下常用 Dialog
  */
-public abstract class CommonDialog<B extends CommonDialog.DialogBuilder> extends DialogFragment {
+public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragment {
     protected Activity activity;
     protected boolean cancelable;
 
     public CommonDialog(B builder) {
-        this.activity = builder.activity;
-        this.cancelable = builder.cancelable;
+        if (null == builder.getActivity()) {
+            throw new RuntimeException("null pointer.");
+        }
+        this.activity = builder.getActivity();
+        this.cancelable = builder.isCancelable();
     }
 
     @Override
@@ -99,25 +103,16 @@ public abstract class CommonDialog<B extends CommonDialog.DialogBuilder> extends
         show(activity.getFragmentManager());
     }
 
-    public static class DialogBuilder {
-        protected Activity activity;
-        protected boolean cancelable;
-
-        public DialogBuilder(Activity activity) {
-            this.activity = activity;
-        }
-    }
-
     protected ViewCommonUtils getViewCommonUtils() {
         return ViewCommonUtils.getInstance();
     }
 
     public void showTooltip(CharSequence text) {
-        getViewCommonUtils().showTooltip(getContext(), text);
+        getViewCommonUtils().showTooltip(getActivity(), text);
     }
 
     public void showLongTooltip(CharSequence text) {
-        getViewCommonUtils().showLongTooltip(getContext(), text);
+        getViewCommonUtils().showLongTooltip(getActivity(), text);
     }
 
     public void setViewsFocusable(boolean focusable, View... views) {

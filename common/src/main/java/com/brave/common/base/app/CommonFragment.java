@@ -37,11 +37,11 @@ public abstract class CommonFragment extends Fragment {
     }
 
     public void showTooltip(CharSequence text) {
-        getViewCommonUtils().showTooltip(getContext(), text);
+        getViewCommonUtils().showTooltip(getActivity(), text);
     }
 
     public void showLongTooltip(CharSequence text) {
-        getViewCommonUtils().showLongTooltip(getContext(), text);
+        getViewCommonUtils().showLongTooltip(getActivity(), text);
     }
 
     public void setViewsFocusable(boolean focusable, View... views) {
