@@ -1,17 +1,14 @@
 package com.brave.employ.ui.home;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.brave.common.helper.ActivityHelper;
-import com.brave.common.utils.ScreenUtils;
+import com.brave.common.utils.encrypt.EncryptMode;
+import com.brave.common.utils.encrypt.EncryptPadding;
+import com.brave.common.utils.encrypt.SymmetryUtils;
 import com.brave.employ.R;
-
-import java.util.List;
 
 /**
  * <b>author</b> ： brave tou <br/>
@@ -55,42 +52,49 @@ public class HomeActivity extends FragmentActivity {
         //new TestDialog.Builder(this)
         //        .show();
 
-        List<Activity> activitys = ActivityHelper.getInstance().getStackActivitys();
-        for (Activity activity : activitys) {
-            Log.d(TAG, "onStart: " + activity);
-        }
-        Log.d(TAG, "onStart: StackTop = " + ActivityHelper.getInstance().getStackTopActivity());
+        String encrypt = SymmetryUtils.newInstance()
+                .setDefaultType("AES")
+                .setDefaultMode(EncryptMode.ECB)
+                .setDefaultPadding(EncryptPadding.PKCS5)
+                .setSecretKey("zhongshangpuhuis")
+                .setText("我是你陶大哥！")
+                .encryptToBase64();
 
-        Log.d(TAG, "onStart: ----------------------------------------------------------");
+        Log.d(TAG, "onStart: " + encrypt);
 
-        Log.d(TAG, "onStart: " + ScreenUtils.getScreenWidth());
-        Log.d(TAG, "onStart: " + ScreenUtils.getScreenHeight());
 
-        Log.d(TAG, "onStart: ----------------------------------------------------------");
+        String decrypt = SymmetryUtils.newInstance()
+                .setDefaultType("AES")
+                .setDefaultMode(EncryptMode.ECB)
+                .setDefaultPadding(EncryptPadding.PKCS5)
+                .setSecretKey("zhongshangpuhuis")
+                .setText(encrypt)
+                .decryptByBase64();
 
-        Log.d(TAG, "onStart: " + ScreenUtils.isLandscape());
-        Log.d(TAG, "onStart: " + ScreenUtils.isPortrait());
+        Log.d(TAG, "onStart: " + decrypt);
 
-        Log.d(TAG, "onStart: ----------------------------------------------------------");
+        test();
+    }
 
-        Log.d(TAG, "onStart: " + ScreenUtils.isPhablet());
+    private void test() {
+        byte[] encrypt = SymmetryUtils.newInstance()
+                .setDefaultType("AES")
+                .setDefaultMode(EncryptMode.ECB)
+                .setDefaultPadding(EncryptPadding.PKCS5)
+                .setSecretKey("zhongshangpuhuis")
+                .setText("我是你陶大哥！")
+                .encrypt();
 
-        Log.d(TAG, "onStart: ----------------------------------------------------------");
+        Log.d(TAG, "test: " + encrypt);
 
-        // ScreenUtils.setFullScreen(this);
+        byte[] decrypt = SymmetryUtils.newInstance()
+                .setDefaultType("AES")
+                .setDefaultMode(EncryptMode.ECB)
+                .setDefaultPadding(EncryptPadding.PKCS5)
+                .setSecretKey("zhongshangpuhuis")
+                .setText(encrypt)
+                .decrypt();
 
-        Log.d(TAG, "onStart: ----------------------------------------------------------");
-
-        // ScreenUtils.setSleepTime(1000);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                List<Activity> activitys = ActivityHelper.getInstance().getStackActivitys();
-                for (Activity activity : activitys) {
-                    Log.d(TAG, "run: " + activity);
-                }
-            }
-        }, 3 * 1000);
+        Log.d(TAG, "test: " + new String(decrypt));
     }
 }
