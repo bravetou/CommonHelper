@@ -52,6 +52,34 @@ public class HomeActivity extends FragmentActivity {
         //new TestDialog.Builder(this)
         //        .show();
 
+        testAES();
+
+        testDES();
+    }
+
+    private void testDES() {
+        String encrypt = EncryptUtils.newInstance()
+                .setDefaultAlgorithm("DES")
+                .setDefaultMode(EncryptMode.ECB)
+                .setDefaultPadding(EncryptPadding.PKCS5)
+                .setSecretKey("abcdefgh")
+                .setText("我是你陶大哥！")
+                .encryptToBase64();
+
+        Log.d(TAG, "testDES: " + encrypt);
+
+        String decrypt = EncryptUtils.newInstance()
+                .setDefaultAlgorithm("DES")
+                .setDefaultMode(EncryptMode.ECB)
+                .setDefaultPadding(EncryptPadding.PKCS5)
+                .setSecretKey("abcdefgh")
+                .setText(encrypt)
+                .decryptByBase64();
+
+        Log.d(TAG, "testDES: " + new String(decrypt));
+    }
+
+    private void testAES() {
         String encrypt = EncryptUtils.newInstance()
                 .setDefaultAlgorithm("AES")
                 .setDefaultMode(EncryptMode.ECB)
@@ -60,7 +88,7 @@ public class HomeActivity extends FragmentActivity {
                 .setText("我是你陶大哥！")
                 .encryptToBase64();
 
-        Log.d(TAG, "onStart: " + encrypt);
+        Log.d(TAG, "testAES: " + encrypt);
 
 
         String decrypt = EncryptUtils.newInstance()
@@ -71,30 +99,6 @@ public class HomeActivity extends FragmentActivity {
                 .setText(encrypt)
                 .decryptByBase64();
 
-        Log.d(TAG, "onStart: " + decrypt);
-
-        test();
-    }
-
-    private void test() {
-        byte[] encrypt = EncryptUtils.newInstance()
-                .setDefaultAlgorithm("AES")
-                .setDefaultMode(EncryptMode.ECB)
-                .setDefaultPadding(EncryptPadding.PKCS5)
-                .setSecretKey("zhongshangpuhuis")
-                .setText("我是你陶大哥！")
-                .encrypt();
-
-        Log.d(TAG, "test: " + encrypt);
-
-        byte[] decrypt = EncryptUtils.newInstance()
-                .setDefaultAlgorithm("AES")
-                .setDefaultMode(EncryptMode.ECB)
-                .setDefaultPadding(EncryptPadding.PKCS5)
-                .setSecretKey("zhongshangpuhuis")
-                .setText(encrypt)
-                .decrypt();
-
-        Log.d(TAG, "test: " + new String(decrypt));
+        Log.d(TAG, "testAES: " + decrypt);
     }
 }
