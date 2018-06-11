@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
 
+import com.brave.common.helper.ActivityHelper;
 import com.brave.common.utils.ViewCommonUtils;
 
 /**
@@ -22,6 +23,8 @@ public abstract class CommonActivity extends Activity {
         if (0 != loadLayoutResId()) {
             setContentView(loadLayoutResId());
         }
+        // 把本 Activity 加入存活集合中
+        getActivityHelper().addActivity(this);
     }
 
     /**
@@ -29,6 +32,17 @@ public abstract class CommonActivity extends Activity {
      */
     protected abstract @LayoutRes
     int loadLayoutResId();
+
+    @Override
+    protected void onDestroy() {
+        // 把本 Activity 从存活集合中移除并杀死
+        getActivityHelper().removeActivity(this);
+        super.onDestroy();
+    }
+
+    public ActivityHelper getActivityHelper() {
+        return ActivityHelper.getInstance();
+    }
 
     public Context getContext() {
         return this;
