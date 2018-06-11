@@ -2,7 +2,6 @@ package com.brave.employ.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.support.v4.app.FragmentActivity;
 
 import com.brave.common.base.DialogBuilder;
 import com.brave.common.base.v4.CommonDialog;

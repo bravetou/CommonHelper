@@ -7,7 +7,7 @@ import android.app.Activity;
  * <b>createTime</b> ： 2018/6/11 <br/>
  * <b>description</b> ：dialog Builder
  */
-public class DialogBuilder {
+public abstract class DialogBuilder {
     private Activity activity;
     private boolean cancelable;
 
