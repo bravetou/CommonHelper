@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.brave.common.utils.encrypt.EncryptMode;
 import com.brave.common.utils.encrypt.EncryptPadding;
-import com.brave.common.utils.encrypt.SymmetryUtils;
+import com.brave.common.utils.encrypt.EncryptUtils;
 import com.brave.employ.R;
 
 /**
@@ -52,8 +52,8 @@ public class HomeActivity extends FragmentActivity {
         //new TestDialog.Builder(this)
         //        .show();
 
-        String encrypt = SymmetryUtils.newInstance()
-                .setDefaultType("AES")
+        String encrypt = EncryptUtils.newInstance()
+                .setDefaultAlgorithm("AES")
                 .setDefaultMode(EncryptMode.ECB)
                 .setDefaultPadding(EncryptPadding.PKCS5)
                 .setSecretKey("zhongshangpuhuis")
@@ -63,8 +63,8 @@ public class HomeActivity extends FragmentActivity {
         Log.d(TAG, "onStart: " + encrypt);
 
 
-        String decrypt = SymmetryUtils.newInstance()
-                .setDefaultType("AES")
+        String decrypt = EncryptUtils.newInstance()
+                .setDefaultAlgorithm("AES")
                 .setDefaultMode(EncryptMode.ECB)
                 .setDefaultPadding(EncryptPadding.PKCS5)
                 .setSecretKey("zhongshangpuhuis")
@@ -77,8 +77,8 @@ public class HomeActivity extends FragmentActivity {
     }
 
     private void test() {
-        byte[] encrypt = SymmetryUtils.newInstance()
-                .setDefaultType("AES")
+        byte[] encrypt = EncryptUtils.newInstance()
+                .setDefaultAlgorithm("AES")
                 .setDefaultMode(EncryptMode.ECB)
                 .setDefaultPadding(EncryptPadding.PKCS5)
                 .setSecretKey("zhongshangpuhuis")
@@ -87,8 +87,8 @@ public class HomeActivity extends FragmentActivity {
 
         Log.d(TAG, "test: " + encrypt);
 
-        byte[] decrypt = SymmetryUtils.newInstance()
-                .setDefaultType("AES")
+        byte[] decrypt = EncryptUtils.newInstance()
+                .setDefaultAlgorithm("AES")
                 .setDefaultMode(EncryptMode.ECB)
                 .setDefaultPadding(EncryptPadding.PKCS5)
                 .setSecretKey("zhongshangpuhuis")

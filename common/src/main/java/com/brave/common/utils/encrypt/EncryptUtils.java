@@ -18,16 +18,16 @@ import javax.crypto.spec.SecretKeySpec;
  * <b>createTime</b> ： 2018/6/11 <br/>
  * <b>description</b> ： 对称 加（解）密 工具类
  */
-public class SymmetryUtils {
+public class EncryptUtils {
     // 默认编码格式
     private Charset defaultCharset;
-    // 默认加（解）密类型
-    private String defaultType;
-    // 默认加（解）密模式
+    // 默认加（解）密 算法
+    private String defaultAlgorithm;
+    // 默认加（解）密 模式
     private String defaultMode;
-    // 默认加（解）密填充
+    // 默认加（解）密 填充
     private String defaultPadding;
-    // 默认的加（解）密 类型/模式/填充 组合
+    // 默认的加（解）密 算法/模式/填充 组合
     private String defaultCipher;
 
     // 加解密 密钥
@@ -37,13 +37,13 @@ public class SymmetryUtils {
     private String content;
     private byte[] text;
 
-    public static SymmetryUtils newInstance() {
-        return new SymmetryUtils();
+    public static EncryptUtils newInstance() {
+        return new EncryptUtils();
     }
 
-    private SymmetryUtils() {
+    private EncryptUtils() {
         this.defaultCharset = Charset.forName("UTF-8");
-        this.defaultType = "AES";
+        this.defaultAlgorithm = "AES";
         this.defaultMode = EncryptMode.ECB.value;
         this.defaultPadding = EncryptPadding.PKCS5.value;
         // defaultCipher = defaultType + "/" + defaultMode + "/" + defaultPadding;
@@ -60,7 +60,7 @@ public class SymmetryUtils {
         byte[] original = null;
         try {
             // 设置 秘钥与类型
-            SecretKeySpec spec = new SecretKeySpec(key, defaultType);
+            SecretKeySpec spec = new SecretKeySpec(key, defaultAlgorithm);
             // 设置 类型/模式/填充 组合
             Cipher cipher = Cipher.getInstance(defaultCipher);
             // 设置 模式 >>> 加密（解密）和SecretKeySpec
@@ -88,7 +88,7 @@ public class SymmetryUtils {
      *
      * @param charsetName 编码名
      */
-    public SymmetryUtils setDefaultCharset(String charsetName) {
+    public EncryptUtils setDefaultCharset(String charsetName) {
         this.defaultCharset = Charset.forName(charsetName);
         return this;
     }
@@ -96,23 +96,23 @@ public class SymmetryUtils {
     /**
      * 设置加解密编码
      */
-    public SymmetryUtils setDefaultCharset(Charset defaultCharset) {
+    public EncryptUtils setDefaultCharset(Charset defaultCharset) {
         this.defaultCharset = defaultCharset;
         return this;
     }
 
     /**
-     * 设置加解密类型{? >>> AES、DES...}
+     * 设置加解密算法{? >>> AES、DES...}
      */
-    public SymmetryUtils setDefaultType(String defaultType) {
-        this.defaultType = defaultType;
+    public EncryptUtils setDefaultAlgorithm(String defaultAlgorithm) {
+        this.defaultAlgorithm = defaultAlgorithm;
         return this;
     }
 
     /**
-     * 设置加解密模式
+     * 设置加解密算法
      */
-    public SymmetryUtils setDefaultMode(EncryptMode encryptMode) {
+    public EncryptUtils setDefaultMode(EncryptMode encryptMode) {
         this.defaultMode = encryptMode.value;
         return this;
     }
@@ -120,7 +120,7 @@ public class SymmetryUtils {
     /**
      * 设置加解密模式
      */
-    public SymmetryUtils setDefaultMode(String defaultMode) {
+    public EncryptUtils setDefaultMode(String defaultMode) {
         this.defaultMode = defaultMode;
         return this;
     }
@@ -128,7 +128,7 @@ public class SymmetryUtils {
     /**
      * 设置加解密填充
      */
-    public SymmetryUtils setDefaultPadding(EncryptPadding encryptPadding) {
+    public EncryptUtils setDefaultPadding(EncryptPadding encryptPadding) {
         this.defaultPadding = encryptPadding.value;
         return this;
     }
@@ -136,7 +136,7 @@ public class SymmetryUtils {
     /**
      * 设置加解密填充
      */
-    public SymmetryUtils setDefaultPadding(String defaultPadding) {
+    public EncryptUtils setDefaultPadding(String defaultPadding) {
         this.defaultPadding = defaultPadding;
         return this;
     }
@@ -144,7 +144,7 @@ public class SymmetryUtils {
     /**
      * 设置 密钥
      */
-    public SymmetryUtils setSecretKey(String secretKey) {
+    public EncryptUtils setSecretKey(String secretKey) {
         this.secretKey = secretKey;
         return this;
     }
@@ -152,7 +152,7 @@ public class SymmetryUtils {
     /**
      * 设置 密钥
      */
-    public SymmetryUtils setSecretKey(byte[] key) {
+    public EncryptUtils setSecretKey(byte[] key) {
         this.key = key;
         return this;
     }
@@ -160,7 +160,7 @@ public class SymmetryUtils {
     /**
      * 设置 加密内容
      */
-    public SymmetryUtils setText(String content) {
+    public EncryptUtils setText(String content) {
         this.content = content;
         return this;
     }
@@ -168,7 +168,7 @@ public class SymmetryUtils {
     /**
      * 设置 加密内容
      */
-    public SymmetryUtils setText(byte[] text) {
+    public EncryptUtils setText(byte[] text) {
         this.text = text;
         return this;
     }
@@ -177,7 +177,7 @@ public class SymmetryUtils {
      * 不能有空的密钥和文本
      */
     private void isNull() {
-        defaultCipher = defaultType + "/" + defaultMode + "/" + defaultPadding;
+        defaultCipher = defaultAlgorithm + "/" + defaultMode + "/" + defaultPadding;
         System.out.println("defaultCipher = " + defaultCipher);
         if (!TextUtils.isEmpty(secretKey)) {
             key = secretKey.getBytes(defaultCharset);
