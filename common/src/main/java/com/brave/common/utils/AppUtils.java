@@ -15,7 +15,7 @@ import com.brave.common.CommonConfig;
  * <b>description</b> ： APP 工具类
  */
 public class AppUtils {
-    private Context context;
+    private static Context context;
 
     private static class SingletonHolder {
         private volatile static AppUtils mInstance = new AppUtils();
@@ -39,9 +39,9 @@ public class AppUtils {
      * 如果调用此方法则 {@link #getContext()} 中使用的 {@link CommonConfig#getContext()} 失效<br/>
      * 如需再次使用 {@link CommonConfig#getContext()} 需要置空 null
      */
-    public AppUtils with(Context context) {
-        this.context = context;
-        return this;
+    public static AppUtils with(Context context) {
+        AppUtils.context = context;
+        return getInstance();
     }
 
     /**
