@@ -1,11 +1,8 @@
 package com.brave.common.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
-import android.telephony.TelephonyManager;
 
 import com.brave.common.CommonConfig;
 
@@ -14,40 +11,19 @@ import com.brave.common.CommonConfig;
  * <b>createTime</b> ： 2018/6/9 <br/>
  * <b>description</b> ： APP 工具类
  */
-public class AppUtils {
-    private static Context context;
-
-    private static class SingletonHolder {
-        private volatile static AppUtils mInstance = new AppUtils();
-    }
-
-    public static AppUtils getInstance() {
-        return SingletonHolder.mInstance;
-    }
-
+public final class AppUtils {
     private AppUtils() {
+        throw new RuntimeException("cannot be instantiated");
     }
 
-    private Context getContext() {
-        if (null != context) {
-            return context;
-        }
+    private static Context getContext() {
         return CommonConfig.getInstance().getContext();
-    }
-
-    /**
-     * 如果调用此方法则 {@link #getContext()} 中使用的 {@link CommonConfig#getContext()} 失效<br/>
-     * 如需再次使用 {@link CommonConfig#getContext()} 需要置空 null
-     */
-    public static AppUtils with(Context context) {
-        AppUtils.context = context;
-        return getInstance();
     }
 
     /**
      * 获取 PackageInfo 对象
      */
-    public PackageInfo getPackageInfo() {
+    public static PackageInfo getPackageInfo() {
         try {
             PackageManager packageManager = getContext().getPackageManager();
             return packageManager.getPackageInfo(
@@ -61,7 +37,7 @@ public class AppUtils {
     /**
      * 获取 APP 名称
      */
-    public String getAppName() {
+    public static String getAppName() {
         PackageInfo packageInfo = getPackageInfo();
         return null == packageInfo ? null : getContext().getResources().getString(
                 packageInfo.applicationInfo.labelRes);
@@ -70,7 +46,7 @@ public class AppUtils {
     /**
      * 获取 APP 版本名
      */
-    public String getVersionName() {
+    public static String getVersionName() {
         PackageInfo packageInfo = getPackageInfo();
         return null == packageInfo ? null : packageInfo.versionName;
     }
@@ -78,53 +54,8 @@ public class AppUtils {
     /**
      * 获取 APP 版本号
      */
-    public int getVersionCode() {
+    public static int getVersionCode() {
         PackageInfo packageInfo = getPackageInfo();
         return null == packageInfo ? -1 : packageInfo.versionCode;
-    }
-
-    /**
-     * 获取 设备厂商
-     */
-    public String getBrand() {
-        return Build.BRAND;
-    }
-
-    /**
-     * 获取 设备名称
-     */
-    public String getModel() {
-        return Build.MODEL;
-    }
-
-    /**
-     * 获取 PackageManager 对象
-     */
-    private TelephonyManager getTelephonyManager() {
-        return (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
-    }
-
-    /**
-     * 获取 设备ID(DeviceId)
-     */
-    @SuppressLint("MissingPermission")
-    public String getDeviceId() {
-        return getTelephonyManager().getDeviceId();
-    }
-
-    /**
-     * 获取 设备SIM(SimSerialNumber)
-     */
-    @SuppressLint("MissingPermission")
-    public String getSimSerialNumber() {
-        return getTelephonyManager().getSimSerialNumber();
-    }
-
-    /**
-     * 获取 设备IMSI(SubscriberId)
-     */
-    @SuppressLint("MissingPermission")
-    public String getSubscriberId() {
-        return getTelephonyManager().getSubscriberId();
     }
 }
