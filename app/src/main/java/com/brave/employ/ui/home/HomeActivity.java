@@ -8,6 +8,7 @@ import android.util.Log;
 import com.brave.common.utils.cipher.CipherMode;
 import com.brave.common.utils.cipher.CipherPadding;
 import com.brave.common.utils.cipher.CipherUtils;
+import com.brave.common.utils.time.TimeUtils;
 import com.brave.employ.R;
 
 /**
@@ -55,6 +56,22 @@ public class HomeActivity extends FragmentActivity {
         testAES();
 
         testDES();
+
+        testTime();
+    }
+
+    private void testTime() {
+        Log.d(TAG, "testTime: " + TimeUtils.getInstance().getYear());
+        Log.d(TAG, "testTime: " + TimeUtils.getInstance().getMonth());
+        Log.d(TAG, "testTime: " + TimeUtils.getInstance().getDay());
+        Log.d(TAG, "testTime: " + TimeUtils.getInstance().getHour());
+        Log.d(TAG, "testTime: " + TimeUtils.getInstance().getMinute());
+        Log.d(TAG, "testTime: " + TimeUtils.getInstance().getSecond());
+        Log.d(TAG, "testTime: " + TimeUtils.getInstance().getMillisecond());
+        Log.d(TAG, "testTime: " + TimeUtils.getInstance().getWeek());
+        Log.i(TAG, "testTime: -------------------------------------");
+        Log.d(TAG, "testTime: " + TimeUtils.getInstance().format("yyyy年MM月dd日 HH:mm:ss").time(TimeUtils.getCurrentTime()).get());
+        Log.d(TAG, "testTime: " + TimeUtils.getInstance().format("yyyy年MM月dd日 HH:mm:ss").time("2018年06月12日 15:42:00").asTime());
     }
 
     private void testDES() {
