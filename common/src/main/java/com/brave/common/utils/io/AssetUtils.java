@@ -18,6 +18,10 @@ import java.io.InputStream;
  * <b>description</b> ： assets 工具类
  */
 public final class AssetUtils {
+    private AssetUtils() {
+        throw new RuntimeException("cannot be instantiated");
+    }
+
     private static Context getContext() {
         return CommonConfig.getInstance().getContext();
     }
