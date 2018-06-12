@@ -1,4 +1,4 @@
-package com.brave.common.utils.encrypt;
+package com.brave.common.utils.cipher;
 
 import android.text.TextUtils;
 import android.util.Base64;
@@ -16,9 +16,9 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * <b>author</b> ： brave tou <br/>
  * <b>createTime</b> ： 2018/6/11 <br/>
- * <b>description</b> ： 对称 加（解）密 工具类
+ * <b>description</b> ： 加（解）密 工具类
  */
-public class EncryptUtils {
+public class CipherUtils {
     // 默认编码格式
     private Charset defaultCharset;
     // 默认加（解）密 算法
@@ -37,15 +37,15 @@ public class EncryptUtils {
     private String content;
     private byte[] text;
 
-    public static EncryptUtils newInstance() {
-        return new EncryptUtils();
+    public static CipherUtils newInstance() {
+        return new CipherUtils();
     }
 
-    private EncryptUtils() {
+    private CipherUtils() {
         this.defaultCharset = Charset.forName("UTF-8");
         this.defaultAlgorithm = "AES";
-        this.defaultMode = EncryptMode.ECB.value;
-        this.defaultPadding = EncryptPadding.PKCS5.value;
+        this.defaultMode = CipherMode.ECB.value;
+        this.defaultPadding = CipherPadding.PKCS5.value;
         // defaultCipher = defaultType + "/" + defaultMode + "/" + defaultPadding;
     }
 
@@ -88,7 +88,7 @@ public class EncryptUtils {
      *
      * @param charsetName 编码名
      */
-    public EncryptUtils setDefaultCharset(String charsetName) {
+    public CipherUtils setDefaultCharset(String charsetName) {
         this.defaultCharset = Charset.forName(charsetName);
         return this;
     }
@@ -96,7 +96,7 @@ public class EncryptUtils {
     /**
      * 设置加解密编码
      */
-    public EncryptUtils setDefaultCharset(Charset defaultCharset) {
+    public CipherUtils setDefaultCharset(Charset defaultCharset) {
         this.defaultCharset = defaultCharset;
         return this;
     }
@@ -104,7 +104,7 @@ public class EncryptUtils {
     /**
      * 设置加解密算法{? >>> AES、DES...}
      */
-    public EncryptUtils setDefaultAlgorithm(String defaultAlgorithm) {
+    public CipherUtils setDefaultAlgorithm(String defaultAlgorithm) {
         this.defaultAlgorithm = defaultAlgorithm;
         return this;
     }
@@ -112,15 +112,15 @@ public class EncryptUtils {
     /**
      * 设置加解密算法
      */
-    public EncryptUtils setDefaultMode(EncryptMode encryptMode) {
-        this.defaultMode = encryptMode.value;
+    public CipherUtils setDefaultMode(CipherMode cipherMode) {
+        this.defaultMode = cipherMode.value;
         return this;
     }
 
     /**
      * 设置加解密模式
      */
-    public EncryptUtils setDefaultMode(String defaultMode) {
+    public CipherUtils setDefaultMode(String defaultMode) {
         this.defaultMode = defaultMode;
         return this;
     }
@@ -128,15 +128,15 @@ public class EncryptUtils {
     /**
      * 设置加解密填充
      */
-    public EncryptUtils setDefaultPadding(EncryptPadding encryptPadding) {
-        this.defaultPadding = encryptPadding.value;
+    public CipherUtils setDefaultPadding(CipherPadding cipherPadding) {
+        this.defaultPadding = cipherPadding.value;
         return this;
     }
 
     /**
      * 设置加解密填充
      */
-    public EncryptUtils setDefaultPadding(String defaultPadding) {
+    public CipherUtils setDefaultPadding(String defaultPadding) {
         this.defaultPadding = defaultPadding;
         return this;
     }
@@ -144,7 +144,7 @@ public class EncryptUtils {
     /**
      * 设置 密钥
      */
-    public EncryptUtils setSecretKey(String secretKey) {
+    public CipherUtils setSecretKey(String secretKey) {
         this.secretKey = secretKey;
         return this;
     }
@@ -152,7 +152,7 @@ public class EncryptUtils {
     /**
      * 设置 密钥
      */
-    public EncryptUtils setSecretKey(byte[] key) {
+    public CipherUtils setSecretKey(byte[] key) {
         this.key = key;
         return this;
     }
@@ -160,7 +160,7 @@ public class EncryptUtils {
     /**
      * 设置 加密内容
      */
-    public EncryptUtils setText(String content) {
+    public CipherUtils setText(String content) {
         this.content = content;
         return this;
     }
@@ -168,7 +168,7 @@ public class EncryptUtils {
     /**
      * 设置 加密内容
      */
-    public EncryptUtils setText(byte[] text) {
+    public CipherUtils setText(byte[] text) {
         this.text = text;
         return this;
     }

@@ -1,11 +1,11 @@
-package com.brave.common.utils.encrypt;
+package com.brave.common.utils.cipher;
 
 /**
  * <b>author</b> ： brave tou <br/>
  * <b>createTime</b> ： 2018/6/11 <br/>
  * <b>description</b> ：枚举 加解密 模式
  */
-public enum EncryptMode {
+public enum CipherMode {
     ECB("ECB"),
     CBC("CBC"),
     CTR("CTR"),
@@ -14,7 +14,7 @@ public enum EncryptMode {
 
     String value;
 
-    EncryptMode(String value) {
+    CipherMode(String value) {
         this.value = value;
     }
 }

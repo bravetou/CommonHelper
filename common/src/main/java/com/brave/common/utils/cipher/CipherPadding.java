@@ -1,11 +1,11 @@
-package com.brave.common.utils.encrypt;
+package com.brave.common.utils.cipher;
 
 /**
  * <b>author</b> ： brave tou <br/>
  * <b>createTime</b> ： 2018/6/11 <br/>
- * <b>description</b> ：举 加解密 填充方式
+ * <b>description</b> ：枚举 加解密 填充方式
  */
-public enum EncryptPadding {
+public enum CipherPadding {
     PKCS5("PKCS5Padding"),
     PKCS7("PKCS7Padding"),
     No("NoPadding"),
@@ -14,7 +14,7 @@ public enum EncryptPadding {
 
     String value;
 
-    EncryptPadding(String value) {
+    CipherPadding(String value) {
         this.value = value;
     }
 }

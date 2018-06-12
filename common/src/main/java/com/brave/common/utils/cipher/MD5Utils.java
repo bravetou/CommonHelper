@@ -1,4 +1,4 @@
-package com.brave.common.utils.encrypt;
+package com.brave.common.utils.cipher;
 
 import android.text.TextUtils;
 
@@ -72,17 +72,17 @@ public final class MD5Utils {
      * @param text 明文
      */
     public static String encrypt(String pwd, String text) {
-        // 文本16位加密
-        String encrypt = encrypt16(text);
+        // 文本32位加密
+        String encrypt = encrypt(text);
         if (TextUtils.isEmpty(encrypt)) {
             return "";
         }
-        if (!TextUtils.isEmpty(pwd)) {
+        if (TextUtils.isEmpty(pwd)) {
             pwd = "fountain";
         }
-        // 密码 + 16位加密的文本 再次加密
-        encrypt = encrypt16(pwd + encrypt);
-        // 明文 + （密码 + 16位加密的文本） 再次32位加密
+        // 密码 + 32位加密的文本 再次加密
+        encrypt = encrypt(pwd + encrypt);
+        // 明文 + （密码 + 32位加密的文本） 再次32位加密
         return encrypt(text + encrypt);
     }
 
@@ -98,7 +98,7 @@ public final class MD5Utils {
         if (TextUtils.isEmpty(encrypt)) {
             return "";
         }
-        if (!TextUtils.isEmpty(pwd)) {
+        if (TextUtils.isEmpty(pwd)) {
             pwd = "fountain";
         }
         // 密码 + 16位加密的文本 再次加密

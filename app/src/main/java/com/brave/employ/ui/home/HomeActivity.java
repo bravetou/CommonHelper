@@ -5,9 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.brave.common.utils.encrypt.EncryptMode;
-import com.brave.common.utils.encrypt.EncryptPadding;
-import com.brave.common.utils.encrypt.EncryptUtils;
+import com.brave.common.utils.cipher.CipherMode;
+import com.brave.common.utils.cipher.CipherPadding;
+import com.brave.common.utils.cipher.CipherUtils;
 import com.brave.employ.R;
 
 /**
@@ -58,20 +58,20 @@ public class HomeActivity extends FragmentActivity {
     }
 
     private void testDES() {
-        String encrypt = EncryptUtils.newInstance()
+        String encrypt = CipherUtils.newInstance()
                 .setDefaultAlgorithm("DES")
-                .setDefaultMode(EncryptMode.ECB)
-                .setDefaultPadding(EncryptPadding.PKCS5)
+                .setDefaultMode(CipherMode.ECB)
+                .setDefaultPadding(CipherPadding.PKCS5)
                 .setSecretKey("abcdefgh")
                 .setText("我是你陶大哥！")
                 .encryptToBase64();
 
         Log.d(TAG, "testDES: " + encrypt);
 
-        String decrypt = EncryptUtils.newInstance()
+        String decrypt = CipherUtils.newInstance()
                 .setDefaultAlgorithm("DES")
-                .setDefaultMode(EncryptMode.ECB)
-                .setDefaultPadding(EncryptPadding.PKCS5)
+                .setDefaultMode(CipherMode.ECB)
+                .setDefaultPadding(CipherPadding.PKCS5)
                 .setSecretKey("abcdefgh")
                 .setText(encrypt)
                 .decryptByBase64();
@@ -80,10 +80,10 @@ public class HomeActivity extends FragmentActivity {
     }
 
     private void testAES() {
-        String encrypt = EncryptUtils.newInstance()
+        String encrypt = CipherUtils.newInstance()
                 .setDefaultAlgorithm("AES")
-                .setDefaultMode(EncryptMode.ECB)
-                .setDefaultPadding(EncryptPadding.PKCS5)
+                .setDefaultMode(CipherMode.ECB)
+                .setDefaultPadding(CipherPadding.PKCS5)
                 .setSecretKey("zhongshangpuhuis")
                 .setText("我是你陶大哥！")
                 .encryptToBase64();
@@ -91,10 +91,10 @@ public class HomeActivity extends FragmentActivity {
         Log.d(TAG, "testAES: " + encrypt);
 
 
-        String decrypt = EncryptUtils.newInstance()
+        String decrypt = CipherUtils.newInstance()
                 .setDefaultAlgorithm("AES")
-                .setDefaultMode(EncryptMode.ECB)
-                .setDefaultPadding(EncryptPadding.PKCS5)
+                .setDefaultMode(CipherMode.ECB)
+                .setDefaultPadding(CipherPadding.PKCS5)
                 .setSecretKey("zhongshangpuhuis")
                 .setText(encrypt)
                 .decryptByBase64();
