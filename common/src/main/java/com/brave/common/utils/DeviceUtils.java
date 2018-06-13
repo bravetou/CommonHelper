@@ -38,7 +38,7 @@ public final class DeviceUtils {
     /**
      * 获取 PackageManager 对象
      */
-    private static TelephonyManager getTelephonyManager() {
+    public static TelephonyManager getTelephonyManager() {
         return (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
     }
 

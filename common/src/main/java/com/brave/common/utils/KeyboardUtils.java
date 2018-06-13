@@ -31,7 +31,10 @@ public final class KeyboardUtils {
         return CommonConfig.getInstance().getContext();
     }
 
-    private static InputMethodManager getInputMethodManager() {
+    /**
+     * 获取 InputMethodManager 对象
+     */
+    public static InputMethodManager getInputMethodManager() {
         return (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
@@ -72,7 +75,7 @@ public final class KeyboardUtils {
      * @param activity Activity
      * @param view     视图对象
      */
-    public static void showSoftInputTop(@NonNull Activity activity, View view) {
+    public static void showSoftInputTop(@NonNull Activity activity, @Nullable View view) {
         activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         showSoftInput(view);
     }

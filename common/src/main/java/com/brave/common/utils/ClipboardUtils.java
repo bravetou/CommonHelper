@@ -22,7 +22,10 @@ public final class ClipboardUtils {
         return CommonConfig.getInstance().getContext();
     }
 
-    private static ClipboardManager getClipboardManager() {
+    /**
+     * 获取 ClipboardManager 对象
+     */
+    public static ClipboardManager getClipboardManager() {
         return (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
     }
 

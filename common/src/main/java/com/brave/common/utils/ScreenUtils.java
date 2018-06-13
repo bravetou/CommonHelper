@@ -39,7 +39,10 @@ public final class ScreenUtils {
         return getContext().getResources();
     }
 
-    private static DisplayMetrics getDisplayMetrics() {
+    /**
+     * 获取 DisplayMetrics 对象
+     */
+    public static DisplayMetrics getDisplayMetrics() {
         return getResources().getDisplayMetrics();
     }
 
