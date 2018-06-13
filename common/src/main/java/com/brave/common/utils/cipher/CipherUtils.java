@@ -44,8 +44,8 @@ public class CipherUtils {
     private CipherUtils() {
         this.defaultCharset = Charset.forName("UTF-8");
         this.defaultAlgorithm = "AES";
-        this.defaultMode = CipherMode.ECB.value;
-        this.defaultPadding = CipherPadding.PKCS5.value;
+        this.defaultMode = CipherMode.ECB.getValue();
+        this.defaultPadding = CipherPadding.PKCS5.getValue();
         // defaultCipher = defaultType + "/" + defaultMode + "/" + defaultPadding;
     }
 
@@ -113,7 +113,7 @@ public class CipherUtils {
      * 设置加解密算法
      */
     public CipherUtils setDefaultMode(CipherMode cipherMode) {
-        this.defaultMode = cipherMode.value;
+        this.defaultMode = cipherMode.getValue();
         return this;
     }
 
@@ -129,7 +129,7 @@ public class CipherUtils {
      * 设置加解密填充
      */
     public CipherUtils setDefaultPadding(CipherPadding cipherPadding) {
-        this.defaultPadding = cipherPadding.value;
+        this.defaultPadding = cipherPadding.getValue();
         return this;
     }
 

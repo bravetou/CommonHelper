@@ -1,9 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.brave.common">
 
     <!-- 使用网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 改变 WIFI 状态权限 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 使用 WIFI 状态权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 读取手机状态权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 修改手机状态权限 -->
+    <uses-permission
+        android:name="android.permission.MODIFY_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <!-- 使用网络状态权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

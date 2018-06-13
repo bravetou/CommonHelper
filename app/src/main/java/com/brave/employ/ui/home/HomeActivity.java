@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.brave.common.utils.cipher.CipherMode;
 import com.brave.common.utils.cipher.CipherPadding;
 import com.brave.common.utils.cipher.CipherUtils;
+import com.brave.common.utils.network.NetworkUtils;
 import com.brave.common.utils.time.TimeUtils;
 import com.brave.employ.R;
 
@@ -23,6 +25,8 @@ public class HomeActivity extends FragmentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // NetworkUtils.openNetworkSettings();
     }
 
     @Override
@@ -58,6 +62,41 @@ public class HomeActivity extends FragmentActivity {
         testDES();
 
         testTime();
+
+        testNetwork();
+    }
+
+    private int flag = 0;
+
+    public void testOnClick(View v) {
+        switch (flag) {
+            case 0:
+                NetworkUtils.openDataEnabled();
+                break;
+            case 1:
+                NetworkUtils.openWifiEnabled();
+                break;
+            case 2:
+                NetworkUtils.closeDataEnabled();
+                NetworkUtils.closeWifiEnabled();
+                break;
+            default:
+                flag = -1;
+                break;
+        }
+        flag++;
+    }
+
+    private void testNetwork() {
+        Log.d(TAG, "testNetwork: isAvailable = " + NetworkUtils.isAvailable());
+        Log.d(TAG, "testNetwork: isConnected = " + NetworkUtils.isConnected());
+        Log.d(TAG, "testNetwork: isWifiConnected = " + NetworkUtils.isWifiConnected());
+        Log.d(TAG, "testNetwork: isDataEnabled = " + NetworkUtils.isDataEnabled());
+        Log.d(TAG, "testNetwork: isWifiEnabled = " + NetworkUtils.isWifiEnabled());
+
+        Log.i(TAG, "testTime: -------------------------------------");
+
+
     }
 
     private void testTime() {

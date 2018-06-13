@@ -12,9 +12,13 @@ public enum CipherMode {
     OFB("OFB"),
     CFB("CFB");
 
-    String value;
+    private String value;
 
     CipherMode(String value) {
         this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 }

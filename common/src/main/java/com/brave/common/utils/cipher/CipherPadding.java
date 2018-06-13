@@ -12,9 +12,13 @@ public enum CipherPadding {
     ISO10126("ISO10126Padding"),
     ANSIX923("ANSIX923Padding");
 
-    String value;
+    private String value;
 
     CipherPadding(String value) {
         this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 }
