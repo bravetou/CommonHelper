@@ -29,8 +29,8 @@ public abstract class CommonFragment extends Fragment {
     /**
      * 加载布局资源Id（默认0为不加载）
      */
-    protected abstract @LayoutRes
-    int loadLayoutResId();
+    @LayoutRes
+    protected abstract int loadLayoutResId();
 
     protected ViewCommonUtils getViewCommonUtils() {
         return ViewCommonUtils.getInstance();

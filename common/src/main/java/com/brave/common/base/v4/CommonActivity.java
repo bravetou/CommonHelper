@@ -27,8 +27,8 @@ public abstract class CommonActivity extends FragmentActivity {
     /**
      * 加载布局资源Id（默认0为不加载）
      */
-    protected abstract @LayoutRes
-    int loadLayoutResId();
+    @LayoutRes
+    protected abstract int loadLayoutResId();
 
     public Context getContext() {
         return this;

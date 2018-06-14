@@ -65,8 +65,8 @@ public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragme
     /**
      * 加载 Dialog 主题（默认 0 为 加载无标题主题）
      */
-    protected abstract @StyleRes
-    int loadDialogTheme();
+    @StyleRes
+    protected abstract int loadDialogTheme();
 
     @Nullable
     @Override
@@ -84,8 +84,8 @@ public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragme
     /**
      * 加载布局资源Id（默认0为不加载）
      */
-    protected abstract @LayoutRes
-    int loadLayoutResId();
+    @LayoutRes
+    protected abstract int loadLayoutResId();
 
     @Override
     public void show(FragmentManager manager, String tag) {

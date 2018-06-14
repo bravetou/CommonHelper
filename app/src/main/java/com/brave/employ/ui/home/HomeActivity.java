@@ -1,15 +1,22 @@
 package com.brave.employ.ui.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextPaint;
+import android.text.style.ClickableSpan;
+import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brave.common.utils.cipher.CipherMode;
 import com.brave.common.utils.cipher.CipherPadding;
 import com.brave.common.utils.cipher.CipherUtils;
 import com.brave.common.utils.network.NetworkUtils;
+import com.brave.common.utils.span.SpanUtils;
 import com.brave.common.utils.time.TimeUtils;
 import com.brave.employ.R;
 
@@ -20,13 +27,38 @@ import com.brave.employ.R;
  */
 public class HomeActivity extends FragmentActivity {
     private static final String TAG = "HomeActivity";
+    private TextView textView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+        textView = findViewById(R.id.text_view);
         // NetworkUtils.openNetworkSettings();
+
+        SpanUtils.newInstance()
+                .setText("撒旦撒大大所大转世王老五所多多jdhkjasdhaksdsjdbajfgasadja转世王老五lskdjl圣诞节卡号地块金黄色即可转世王老五到哈萨克大家哈桑,转世王老五")
+                .setForegroundColor(Color.BLUE, "转世王老五")
+                .setBackgroundColor(Color.YELLOW, "老五")
+                .setURL("www.baidu.com", "撒")
+                .setTextSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(View widget) {
+                        Toast.makeText(HomeActivity.this, "onclick : dsjdbajf", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void updateDrawState(TextPaint ds) {
+                        ds.setColor(Color.BLUE);
+                        ds.setUnderlineText(true);
+                    }
+                }, "dsjdbajf")
+                .setTextSpan(new ImageSpan(HomeActivity.this, R.mipmap.ic_launcher), "金黄色")
+                .setClickMovement(true)
+                .setHighlightColorRes(android.R.color.transparent)
+                .into(textView);
     }
 
     @Override
