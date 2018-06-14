@@ -4,21 +4,18 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.text.TextPaint;
-import android.text.style.ClickableSpan;
-import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.brave.common.helper.StatusBarHelper;
 import com.brave.common.utils.cipher.CipherMode;
 import com.brave.common.utils.cipher.CipherPadding;
 import com.brave.common.utils.cipher.CipherUtils;
 import com.brave.common.utils.network.NetworkUtils;
-import com.brave.common.utils.span.SpanUtils;
 import com.brave.common.utils.time.TimeUtils;
 import com.brave.employ.R;
+import com.brave.employ.ui.TestDialog;
 
 /**
  * <b>author</b> ： brave tou <br/>
@@ -38,27 +35,29 @@ public class HomeActivity extends FragmentActivity {
         textView = findViewById(R.id.text_view);
         // NetworkUtils.openNetworkSettings();
 
-        SpanUtils.newInstance()
-                .setText("撒旦撒大大所大转世王老五所多多jdhkjasdhaksdsjdbajfgasadja转世王老五lskdjl圣诞节卡号地块金黄色即可转世王老五到哈萨克大家哈桑,转世王老五")
-                .setForegroundColor(Color.BLUE, "转世王老五")
-                .setBackgroundColor(Color.YELLOW, "老五")
-                .setURL("www.baidu.com", "撒")
-                .setTextSpan(new ClickableSpan() {
-                    @Override
-                    public void onClick(View widget) {
-                        Toast.makeText(HomeActivity.this, "onclick : dsjdbajf", Toast.LENGTH_SHORT).show();
-                    }
+//        SpanUtils.newInstance()
+//                .setText("撒旦撒大大所大转世王老五所多多jdhkjasdhaksdsjdbajfgasadja转世王老五lskdjl圣诞节卡号地块金黄色即可转世王老五到哈萨克大家哈桑,转世王老五")
+//                .setForegroundColor(Color.BLUE, "转世王老五")
+//                .setBackgroundColor(Color.YELLOW, "老五")
+//                .setURL("www.baidu.com", "撒")
+//                .setTextSpan(new ClickableSpan() {
+//                    @Override
+//                    public void onClick(View widget) {
+//                        Toast.makeText(HomeActivity.this, "onclick : dsjdbajf", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void updateDrawState(TextPaint ds) {
+//                        ds.setColor(Color.BLUE);
+//                        ds.setUnderlineText(true);
+//                    }
+//                }, "dsjdbajf")
+//                .setTextSpan(new ImageSpan(HomeActivity.this, R.mipmap.ic_launcher), "金黄色")
+//                .setClickMovement(true)
+//                .setHighlightColorRes(android.R.color.transparent)
+//                .into(textView);
 
-                    @Override
-                    public void updateDrawState(TextPaint ds) {
-                        ds.setColor(Color.BLUE);
-                        ds.setUnderlineText(true);
-                    }
-                }, "dsjdbajf")
-                .setTextSpan(new ImageSpan(HomeActivity.this, R.mipmap.ic_launcher), "金黄色")
-                .setClickMovement(true)
-                .setHighlightColorRes(android.R.color.transparent)
-                .into(textView);
+        StatusBarHelper.getInstance().setIntegration(this);
     }
 
     @Override
@@ -89,34 +88,22 @@ public class HomeActivity extends FragmentActivity {
         //new TestDialog.Builder(this)
         //        .show();
 
-        testAES();
-
-        testDES();
-
-        testTime();
-
-        testNetwork();
+//        testAES();
+//
+//        testDES();
+//
+//        testTime();
+//
+//        testNetwork();
     }
 
     private int flag = 0;
 
     public void testOnClick(View v) {
-        switch (flag) {
-            case 0:
-                NetworkUtils.openDataEnabled();
-                break;
-            case 1:
-                NetworkUtils.openWifiEnabled();
-                break;
-            case 2:
-                NetworkUtils.closeDataEnabled();
-                NetworkUtils.closeWifiEnabled();
-                break;
-            default:
-                flag = -1;
-                break;
-        }
         flag++;
+        if (flag % 2 == 1) {
+            new TestDialog.Builder(this).show();
+        }
     }
 
     private void testNetwork() {

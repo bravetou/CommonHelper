@@ -2,9 +2,17 @@ package com.brave.employ.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.brave.common.base.DialogBuilder;
 import com.brave.common.base.v4.CommonDialog;
+import com.brave.common.helper.StatusBarHelper;
 import com.brave.employ.R;
 
 /**
@@ -14,6 +22,8 @@ import com.brave.employ.R;
  */
 @SuppressLint("ValidFragment")
 public class TestDialog extends CommonDialog<TestDialog.Builder> {
+    private static final String TAG = "TestDialog";
+
     protected TestDialog(Builder builder) {
         super(builder);
     }
@@ -26,6 +36,21 @@ public class TestDialog extends CommonDialog<TestDialog.Builder> {
     @Override
     protected int loadLayoutResId() {
         return R.layout.dialog_test;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+
+        StatusBarHelper.getInstance().setStatusBarColor(getDialog(), Color.RED, rootView);
+
+        return rootView;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     public static class Builder extends DialogBuilder {
