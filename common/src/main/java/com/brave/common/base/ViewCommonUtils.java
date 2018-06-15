@@ -1,4 +1,4 @@
-package com.brave.common.utils;
+package com.brave.common.base;
 
 import android.content.Context;
 import android.support.annotation.IdRes;
@@ -15,17 +15,12 @@ import android.widget.Toast;
  * <b>description</b> ：View 的常用工具
  */
 public class ViewCommonUtils {
-    private static volatile ViewCommonUtils mInstance = null;
+    private static class SingletonHolder {
+        private volatile static ViewCommonUtils mInstance = new ViewCommonUtils();
+    }
 
     public static ViewCommonUtils getInstance() {
-        if (null == mInstance) {
-            synchronized (ViewCommonUtils.class) {
-                if (null == mInstance) {
-                    mInstance = new ViewCommonUtils();
-                }
-            }
-        }
-        return mInstance;
+        return SingletonHolder.mInstance;
     }
 
     private ViewCommonUtils() {

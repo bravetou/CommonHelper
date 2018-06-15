@@ -7,9 +7,11 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Surface;
 import android.view.Window;
 import android.view.WindowManager;
@@ -162,6 +164,35 @@ public final class ScreenUtils {
      *
      * @return {@code true}: 有底部导航栏<br>{@code false}: 反之
      */
+    public static boolean hasNavigationBar(@NonNull Activity activity) {
+        WindowManager windowManager = activity.getWindowManager();
+        Display d = windowManager.getDefaultDisplay();
+        // 获取整个屏幕的高度
+        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            d.getRealMetrics(realDisplayMetrics);
+        } else {
+            return false;
+        }
+        // 整个屏幕的
+        int realHeight = realDisplayMetrics.heightPixels;
+        int realWidth = realDisplayMetrics.widthPixels;
+        // 获取内容展示部分的高度
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        d.getMetrics(displayMetrics);
+        // 内容展示部分的
+        int displayHeight = displayMetrics.heightPixels;
+        int displayWidth = displayMetrics.widthPixels;
+        //
+        return (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
+    }
+
+    /**
+     * 是否拥有底部导航栏
+     *
+     * @return {@code true}: 有底部导航栏<br>{@code false}: 反之
+     */
+    @Deprecated
     public static boolean hasNavigationBar() {
         boolean hasNavigationBar = false;
         int id = getResources().getIdentifier(

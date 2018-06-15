@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
 
-import com.brave.common.utils.ViewCommonUtils;
+import com.brave.common.base.ViewCommonUtils;
 
 /**
  * <b>author</b> ： brave tou <br/>

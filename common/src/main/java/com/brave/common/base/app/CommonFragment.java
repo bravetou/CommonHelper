@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.brave.common.utils.ViewCommonUtils;
+import com.brave.common.base.ViewCommonUtils;
 
 /**
  * <b>author</b> ： brave tou <br/>

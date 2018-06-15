@@ -9,7 +9,7 @@
         android:id="@+id/hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/ic_launcher"
+        android:background="#ececec"
         android:onClick="testOnClick"
         android:padding="6dp"
         android:text="Hello World!"

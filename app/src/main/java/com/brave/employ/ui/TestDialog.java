@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.brave.common.base.DialogBuilder;
 import com.brave.common.base.v4.CommonDialog;
-import com.brave.common.helper.StatusBarHelper;
+import com.brave.common.utils.system.SystemBarUtils;
 import com.brave.employ.R;
 
 /**
@@ -43,7 +43,9 @@ public class TestDialog extends CommonDialog<TestDialog.Builder> {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
-        StatusBarHelper.getInstance().setStatusBarColor(getDialog(), Color.RED, rootView);
+        // StatusBarUtils.getInstance().setStatusBarColor(getDialog(), Color.RED, rootView);
+
+        SystemBarUtils.setSystemBarColor(getDialog(), Color.YELLOW, rootView);
 
         return rootView;
     }

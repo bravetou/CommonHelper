@@ -8,14 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.brave.common.helper.StatusBarHelper;
+import com.brave.common.utils.ScreenUtils;
 import com.brave.common.utils.cipher.CipherMode;
 import com.brave.common.utils.cipher.CipherPadding;
 import com.brave.common.utils.cipher.CipherUtils;
 import com.brave.common.utils.network.NetworkUtils;
+import com.brave.common.utils.system.SystemBarUtils;
 import com.brave.common.utils.time.TimeUtils;
 import com.brave.employ.R;
-import com.brave.employ.ui.TestDialog;
 
 /**
  * <b>author</b> ： brave tou <br/>
@@ -57,7 +57,16 @@ public class HomeActivity extends FragmentActivity {
 //                .setHighlightColorRes(android.R.color.transparent)
 //                .into(textView);
 
-        StatusBarHelper.getInstance().setIntegration(this);
+
+        SystemBarUtils.setSystemBarColor(this, Color.BLUE);
+
+
+//        StatusBarUtils.setIntegration(this);
+//        StatusBarUtils.setStatusBarColor(this, ColorUtils.argb(0.66f, Color.BLUE));
+//        NavBarUtils.setNavBarColor(this, Color.BLUE);
+
+        boolean flag = ScreenUtils.hasNavigationBar(this);
+        Log.d(TAG, "onCreate: " + flag);
     }
 
     @Override
@@ -100,10 +109,27 @@ public class HomeActivity extends FragmentActivity {
     private int flag = 0;
 
     public void testOnClick(View v) {
-        flag++;
-        if (flag % 2 == 1) {
-            new TestDialog.Builder(this).show();
+        switch (flag % 6) {
+            case 0:
+                SystemBarUtils.hideSystemBar(getWindow(), true, false);
+                break;
+            case 1:
+                SystemBarUtils.showSystemBar(getWindow());
+                break;
+            case 2:
+                SystemBarUtils.hideSystemBar(getWindow(), false, true);
+                break;
+            case 3:
+                SystemBarUtils.showSystemBar(getWindow());
+                break;
+            case 5:
+                SystemBarUtils.hideSystemBar(getWindow(), true, true);
+                break;
+            case 6:
+                SystemBarUtils.showSystemBar(getWindow());
+                break;
         }
+        flag++;
     }
 
     private void testNetwork() {
