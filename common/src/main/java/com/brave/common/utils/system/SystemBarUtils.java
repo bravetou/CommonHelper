@@ -576,15 +576,34 @@ public final class SystemBarUtils {
         // | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // 隐藏导航栏
         // | View.SYSTEM_UI_FLAG_FULLSCREEN // 隐藏状态栏
         if (hideStatus) {
+            View statusBar = getStatusBar(window);
+            if (null != statusBar) {
+                statusBar.setVisibility(View.GONE);
+            }
             visibility |= View.SYSTEM_UI_FLAG_FULLSCREEN;
         }
         if (hideNavigation) {
+            View navBar = getNavBar(window);
+            if (null != navBar) {
+                navBar.setVisibility(View.GONE);
+            }
             visibility |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         }
         window.getDecorView().setSystemUiVisibility(visibility);
     }
 
+    /**
+     * 显示 状态栏、导航栏
+     */
     public static void showSystemBar(@NonNull Window window) {
+        View statusBar = getStatusBar(window);
+        if (null != statusBar) {
+            statusBar.setVisibility(View.VISIBLE);
+        }
+        View navBar = getNavBar(window);
+        if (null != navBar) {
+            navBar.setVisibility(View.VISIBLE);
+        }
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
     }
 }

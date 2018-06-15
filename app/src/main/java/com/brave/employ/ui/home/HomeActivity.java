@@ -109,6 +109,7 @@ public class HomeActivity extends FragmentActivity {
     private int flag = 0;
 
     public void testOnClick(View v) {
+        Log.d(TAG, "testOnClick: =========================" + (flag % 6));
         switch (flag % 6) {
             case 0:
                 SystemBarUtils.hideSystemBar(getWindow(), true, false);
@@ -122,10 +123,10 @@ public class HomeActivity extends FragmentActivity {
             case 3:
                 SystemBarUtils.showSystemBar(getWindow());
                 break;
-            case 5:
+            case 4:
                 SystemBarUtils.hideSystemBar(getWindow(), true, true);
                 break;
-            case 6:
+            case 5:
                 SystemBarUtils.showSystemBar(getWindow());
                 break;
         }
