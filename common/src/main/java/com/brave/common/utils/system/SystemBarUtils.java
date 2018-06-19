@@ -23,7 +23,10 @@ import com.brave.common.utils.ScreenUtils;
 /**
  * <b>author</b> ： brave tou <br/>
  * <b>createTime</b> ： 2018/6/15 <br/>
- * <b>description</b> ：系统 状态栏帮助类
+ * <b>description</b> ：系统 状态栏帮助类<br/><b>注意：</b><ul>
+ * <li>没有对状态栏做操作：隐藏导航栏时，需要状态栏会覆盖布局</li>
+ * <li>对状态栏进行了操作：隐藏状态栏时，顶部会出现白条（statusHeight）</li>
+ * </ul>
  */
 public final class SystemBarUtils {
     private static final String STATUS_BAR_TAG = "STATUS_BAR_HELPER_BRAVE";
@@ -551,23 +554,23 @@ public final class SystemBarUtils {
     /**
      * 隐藏 状态栏、导航栏
      * <ul>
-     * <li>{@link View#SYSTEM_UI_FLAG_FULLSCREEN} >>> View已请求进入正常的全屏模式，以便其内容可以接管屏幕，同时仍允许用户与应用程序进行交互</li>
-     * <li>{@link View#SYSTEM_UI_FLAG_HIDE_NAVIGATION} >>> View已请求暂时隐藏系统导航</li>
+     * <li>{@link View#SYSTEM_UI_FLAG_FULLSCREEN} >>> Activity全屏显示，且状态栏被隐藏覆盖掉</li>
+     * <li>{@link View#SYSTEM_UI_FLAG_HIDE_NAVIGATION} >>> 隐藏虚拟按键(导航栏)。有些手机会用虚拟按键来代替物理按键</li>
      * <li>{@link View#SYSTEM_UI_FLAG_IMMERSIVE} >>> View隐藏导航栏时仍希望保持交互SYSTEM_UI_FLAG_HIDE_NAVIGATION</li>
      * <li>{@link View#SYSTEM_UI_FLAG_IMMERSIVE_STICKY} >>> 当隐藏状态栏SYSTEM_UI_FLAG_FULLSCREEN和/或隐藏导航栏时，View会保持交互SYSTEM_UI_FLAG_HIDE_NAVIGATION</li>
-     * <li>{@link View#SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN} >>> View会将其窗口布置为好像它已经请求一样 SYSTEM_UI_FLAG_FULLSCREEN，即使它现在还没有</li>
-     * <li>{@link View#SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION} >>> View会将其窗口布置为好像它已经请求一样 SYSTEM_UI_FLAG_HIDE_NAVIGATION，即使它现在还没有</li>
+     * <li>{@link View#SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN} >>> Activity全屏显示，但状态栏不会被隐藏覆盖，状态栏依然可见，Activity顶端布局部分会被状态遮住</li>
+     * <li>{@link View#SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION} >>> 效果同View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</li>
      * <li>{@link View#SYSTEM_UI_FLAG_LAYOUT_STABLE} >>> 当使用其他布局标志时，我们希望稳定地查看给出的内容插入 fitSystemWindows(Rect)</li>
      * <li>{@link View#SYSTEM_UI_FLAG_LIGHT_STATUS_BAR} >>> 请求状态栏绘制一个与灯光状态栏背景兼容的模式</li>
-     * <li>{@link View#SYSTEM_UI_FLAG_LOW_PROFILE} >>> View已请求系统UI进入不显眼的“低调”模式</li>
-     * <li>{@link View#SYSTEM_UI_FLAG_VISIBLE} >>> View已请求系统UI（状态栏）可见（默认）</li>
-     * <li>{@link View#SYSTEM_UI_LAYOUT_FLAGS} >>> 与系统UI相关的可能影响布局的标志</li>
+     * <li>{@link View#SYSTEM_UI_FLAG_LOW_PROFILE} >>> 状态栏显示处于低能显示状态(low profile模式)，状态栏上一些图标显示会被隐藏</li>
+     * <li>{@link View#SYSTEM_UI_FLAG_VISIBLE} >>> 显示状态栏，Activity不全屏显示(恢复到有状态的正常情况)</li>
+     * <li>{@link View#SYSTEM_UI_LAYOUT_FLAGS} >>> 效果同View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</li>
      * </ul>
      */
     public static void hideSystemBar(@NonNull Window window, boolean hideStatus, boolean hideNavigation) {
         int visibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN // Activity全屏显示，状态栏依然可见，Activity顶端布局部分会被状态栏遮住
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;// Activity全屏显示,导航栏依然可见,Activity底部布局部分被导航栏遮挡
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             visibility |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         } else {
@@ -576,16 +579,22 @@ public final class SystemBarUtils {
         // | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // 隐藏导航栏
         // | View.SYSTEM_UI_FLAG_FULLSCREEN // 隐藏状态栏
         if (hideStatus) {
-            View statusBar = getStatusBar(window);
-            if (null != statusBar) {
-                statusBar.setVisibility(View.GONE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
+                    && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                View statusBar = window.getDecorView().findViewWithTag(STATUS_BAR_TAG);
+                if (null != statusBar) {
+                    statusBar.setVisibility(View.GONE);
+                }
             }
             visibility |= View.SYSTEM_UI_FLAG_FULLSCREEN;
         }
         if (hideNavigation) {
-            View navBar = getNavBar(window);
-            if (null != navBar) {
-                navBar.setVisibility(View.GONE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
+                    && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                View navBar = window.getDecorView().findViewWithTag(NAV_BAR_TAG);
+                if (null != navBar) {
+                    navBar.setVisibility(View.GONE);
+                }
             }
             visibility |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         }
@@ -593,17 +602,97 @@ public final class SystemBarUtils {
     }
 
     /**
+     * 隐藏 状态栏、导航栏
+     */
+    public static void hideSystemBar(@NonNull Window window) {
+        hideSystemBar(window, true, true);
+    }
+
+    /**
+     * 隐藏 状态栏
+     */
+    public static void hideStatusBar(@NonNull Window window) {
+        hideSystemBar(window, true, false);
+    }
+
+    /**
+     * 隐藏 导航栏
+     */
+    public static void hideNavBar(@NonNull Window window) {
+        hideSystemBar(window, false, true);
+    }
+
+    /**
+     * 隐藏 状态栏、导航栏
+     */
+    public static void hideSystemBar(@NonNull Activity activity) {
+        hideSystemBar(activity.getWindow());
+    }
+
+    /**
+     * 隐藏 状态栏
+     */
+    public static void hideStatusBar(@NonNull Activity activity) {
+        hideStatusBar(activity.getWindow());
+    }
+
+    /**
+     * 隐藏 导航栏
+     */
+    public static void hideNavBar(@NonNull Activity activity) {
+        hideNavBar(activity.getWindow());
+    }
+
+    /**
+     * 隐藏 状态栏、导航栏
+     */
+    public static void hideSystemBar(@NonNull Dialog dialog) {
+        hideSystemBar(dialog.getWindow());
+    }
+
+    /**
+     * 隐藏 状态栏
+     */
+    public static void hideStatusBar(@NonNull Dialog dialog) {
+        hideStatusBar(dialog.getWindow());
+    }
+
+    /**
+     * 隐藏 导航栏
+     */
+    public static void hideNavBar(@NonNull Dialog dialog) {
+        hideNavBar(dialog.getWindow());
+    }
+
+    /**
      * 显示 状态栏、导航栏
      */
     public static void showSystemBar(@NonNull Window window) {
-        View statusBar = getStatusBar(window);
-        if (null != statusBar) {
-            statusBar.setVisibility(View.VISIBLE);
-        }
-        View navBar = getNavBar(window);
-        if (null != navBar) {
-            navBar.setVisibility(View.VISIBLE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
+                && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            View statusBar = window.getDecorView().findViewWithTag(STATUS_BAR_TAG);
+            if (null != statusBar) {
+                statusBar.setVisibility(View.VISIBLE);
+            }
+            View navBar = window.getDecorView().findViewWithTag(NAV_BAR_TAG);
+            if (null != navBar) {
+                navBar.setVisibility(View.VISIBLE);
+            }
         }
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+    }
+
+    /**
+     * 显示 状态栏、导航栏
+     */
+    public static void showSystemBar(@NonNull Activity activity) {
+        showSystemBar(activity.getWindow());
+    }
+
+    /**
+     * 显示 状态栏、导航栏
+     */
+    public static void showSystemBar(@NonNull Dialog dialog) {
+        showSystemBar(dialog.getWindow());
     }
 }

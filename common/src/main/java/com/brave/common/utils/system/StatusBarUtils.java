@@ -18,7 +18,10 @@ import android.widget.RelativeLayout;
 /**
  * <b>author</b> ： brave tou <br/>
  * <b>createTime</b> ： 2018/6/14 <br/>
- * <b>description</b> ：状态栏 工具类
+ * <b>description</b> ：状态栏 工具类<br/><b>注意：</b><ul>
+ * <li>没有对状态栏做操作：隐藏导航栏时，需要状态栏会覆盖布局</li>
+ * <li>对状态栏进行了操作：隐藏状态栏时，顶部会出现白条（statusHeight）</li>
+ * </ul>
  */
 public final class StatusBarUtils {
     private StatusBarUtils() {
@@ -79,6 +82,30 @@ public final class StatusBarUtils {
 
     public static void setAlpha(@NonNull Activity activity, @FloatRange(from = 0, to = 1) float alpha) {
         SystemBarUtils.setStatusBarAlpha(activity, alpha);
+    }
+
+    public static void hide(@NonNull Window window) {
+        SystemBarUtils.hideStatusBar(window);
+    }
+
+    public static void hide(@NonNull Activity activity) {
+        SystemBarUtils.hideStatusBar(activity);
+    }
+
+    public static void hide(@NonNull Dialog dialog) {
+        SystemBarUtils.hideStatusBar(dialog);
+    }
+
+    public static void show(@NonNull Window window) {
+        SystemBarUtils.hideStatusBar(window);
+    }
+
+    public static void show(@NonNull Activity activity) {
+        SystemBarUtils.hideStatusBar(activity);
+    }
+
+    public static void show(@NonNull Dialog dialog) {
+        SystemBarUtils.hideStatusBar(dialog);
     }
 
     /**
