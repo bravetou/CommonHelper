@@ -10,4 +10,4 @@
 CommonConfig.getInstance().initialize(this);
 ```
 
- - 直接继承至[CommonApplication](/common/src/java/com/brave/common/base/CommonApplication.java)
+ - 直接继承至[CommonApplication](/common/src/main/java/com/brave/common/base/CommonApplication.java)
