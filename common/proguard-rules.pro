@@ -21,6 +21,6 @@
 #-renamesourcefileattribute SourceFile
 
 # 关闭 multidex 产生的警告
--dontwarn android.support.multidex.**
+#-dontwarn android.support.multidex.**
 # 保持 multidex 下的所有不被混淆
--keep android.support.multidex.** { *; }
+#-keep android.support.multidex.** { *; }
