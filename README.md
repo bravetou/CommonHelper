@@ -7,6 +7,15 @@
 
 <br/>
 
+#### 导入
+
+```java
+dependencies {
+    implementation 'com.github.bravetou:CommonHelper:v1.0.0'
+}
+```
+
+
 #### 功能特点
 
 ---
