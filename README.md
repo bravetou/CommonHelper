@@ -39,5 +39,5 @@
 
 ---
 
- - [使用文档](/CommonHelper/common/usage.md)
+ - [使用文档](https://gitee.com/bravetou/CommonHelper/blob/master/common/usage.md)
 
