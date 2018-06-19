@@ -88,7 +88,7 @@ public class CipherUtils {
      *
      * @param charsetName 编码名
      */
-    public CipherUtils setDefaultCharset(String charsetName) {
+    public CipherUtils setCharset(String charsetName) {
         this.defaultCharset = Charset.forName(charsetName);
         return this;
     }
@@ -96,7 +96,7 @@ public class CipherUtils {
     /**
      * 设置加解密编码
      */
-    public CipherUtils setDefaultCharset(Charset defaultCharset) {
+    public CipherUtils setCharset(Charset defaultCharset) {
         this.defaultCharset = defaultCharset;
         return this;
     }
@@ -104,7 +104,7 @@ public class CipherUtils {
     /**
      * 设置加解密算法{? >>> AES、DES...}
      */
-    public CipherUtils setDefaultAlgorithm(String defaultAlgorithm) {
+    public CipherUtils setAlgorithm(String defaultAlgorithm) {
         this.defaultAlgorithm = defaultAlgorithm;
         return this;
     }
@@ -112,7 +112,7 @@ public class CipherUtils {
     /**
      * 设置加解密算法
      */
-    public CipherUtils setDefaultMode(CipherMode cipherMode) {
+    public CipherUtils setMode(CipherMode cipherMode) {
         this.defaultMode = cipherMode.getValue();
         return this;
     }
@@ -120,7 +120,7 @@ public class CipherUtils {
     /**
      * 设置加解密模式
      */
-    public CipherUtils setDefaultMode(String defaultMode) {
+    public CipherUtils setMode(String defaultMode) {
         this.defaultMode = defaultMode;
         return this;
     }
@@ -128,7 +128,7 @@ public class CipherUtils {
     /**
      * 设置加解密填充
      */
-    public CipherUtils setDefaultPadding(CipherPadding cipherPadding) {
+    public CipherUtils setPadding(CipherPadding cipherPadding) {
         this.defaultPadding = cipherPadding.getValue();
         return this;
     }
@@ -136,7 +136,7 @@ public class CipherUtils {
     /**
      * 设置加解密填充
      */
-    public CipherUtils setDefaultPadding(String defaultPadding) {
+    public CipherUtils setPadding(String defaultPadding) {
         this.defaultPadding = defaultPadding;
         return this;
     }

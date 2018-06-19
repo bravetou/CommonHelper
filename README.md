@@ -17,7 +17,9 @@
  - 支持 动态广播 管理
  - 支持 对称加密、MD5加密等
  - 支持 数据储存（实现文件、XML储存两种），数据库存储 推荐使用三方开源[Realm](https://github.com/realm/realm-java)、[greenDAO](https://github.com/greenrobot/greenDAO)等
+ 
  - 载入 网络帮助工具类
+ - 载入 AssetUtils工具类，实现对assets资源包下文件的存取
  - 载入 SpannableString工具类，告别繁琐的（图文混排）操作
  - 载入 SystemBarUtils(StatusBarUtils、NavBarUtils)工具类，轻巧的实现对状态栏与导航栏的操作
  - 载入 TimeUtils、CountdownUtils工具类，轻巧的实现对时间戳、时间字符串、倒计时的操作
