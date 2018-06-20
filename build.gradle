@@ -29,6 +29,11 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+// 指定javadoc UTF-8格式
+task javadoc(type: Javadoc) {
+    options.encoding = "utf-8"
+}
+
 ext {
     // multi dex 最新版本号
     MULTIDEX_VERSION = "1.0.3"
