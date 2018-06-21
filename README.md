@@ -10,9 +10,12 @@
 #### 导入
 
 ```java
-dependencies {
     implementation 'com.github.bravetou:CommonHelper:1.0.1'
-}
+```
+或
+
+```java
+    implementation 'com.brave.common:common:1.0.1'
 ```
 
 
