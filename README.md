@@ -11,7 +11,7 @@
 
 ```java
 dependencies {
-    implementation 'com.github.bravetou:CommonHelper:v1.0.0'
+    implementation 'com.github.bravetou:CommonHelper:1.0.1'
 }
 ```
 
