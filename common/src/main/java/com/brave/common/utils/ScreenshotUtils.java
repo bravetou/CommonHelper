@@ -3,6 +3,7 @@ package com.brave.common.utils;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.view.View;
 
 /**
@@ -18,14 +19,14 @@ public final class ScreenshotUtils {
     /**
      * 获取当前屏幕截图，包含状态栏
      */
-    public static Bitmap getScreenshot(Activity activity) {
+    public static Bitmap getScreenshot(@NonNull Activity activity) {
         return getViewScreenshot(activity.getWindow().getDecorView());
     }
 
     /**
      * 获取当前屏幕截图，不包含状态栏
      */
-    public static Bitmap getScreenshotNoStatusBar(Activity activity) {
+    public static Bitmap getScreenshotNoStatusBar(@NonNull Activity activity) {
         Rect frame = new Rect();
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
         int statusBarHeight = frame.top,
@@ -38,7 +39,7 @@ public final class ScreenshotUtils {
     /**
      * 获取当前View的截图
      */
-    public static Bitmap getViewScreenshot(View v) {
+    public static Bitmap getViewScreenshot(@NonNull View v) {
         v.setDrawingCacheEnabled(true);
         v.buildDrawingCache();
         Bitmap bmp = v.getDrawingCache();

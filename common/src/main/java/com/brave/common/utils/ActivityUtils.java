@@ -1,4 +1,4 @@
-package com.brave.common.helper;
+package com.brave.common.utils;
 
 import android.app.Activity;
 
@@ -8,23 +8,23 @@ import java.util.List;
 /**
  * <b>author</b> ： brave tou <br/>
  * <b>createTime</b> ： 2018/6/9 <br/>
- * <b>description</b> ： Activity 管理帮助类
+ * <b>description</b> ： Activity 管理工具类
  */
-public class ActivityHelper {
+public class ActivityUtils {
     /**
      * 储存还存活的 Activity 的集合
      */
     private List<Activity> aList;
 
     private static class SingletonHolder {
-        private volatile static ActivityHelper mInstance = new ActivityHelper();
+        private volatile static ActivityUtils mInstance = new ActivityUtils();
     }
 
-    public static ActivityHelper getInstance() {
+    public static ActivityUtils getInstance() {
         return SingletonHolder.mInstance;
     }
 
-    private ActivityHelper() {
+    private ActivityUtils() {
         aList = new ArrayList<>();
     }
 

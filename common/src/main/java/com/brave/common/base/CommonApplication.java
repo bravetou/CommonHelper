@@ -14,6 +14,6 @@ public class CommonApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         // 个人常用配置
-        CommonConfig.getInstance().initialize(this);
+        CommonConfig.init(this);
     }
 }

@@ -23,7 +23,7 @@ public final class AssetUtils {
     }
 
     private static Context getContext() {
-        return CommonConfig.getInstance().getContext();
+        return CommonConfig.getContext();
     }
 
     private static InputStream getInputStream(String fileName) {

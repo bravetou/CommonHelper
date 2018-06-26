@@ -21,14 +21,13 @@ public final class KeyboardUtils {
         throw new RuntimeException("cannot be instantiated");
     }
 
-    /*
-      避免 输入法 面板 遮挡
-      <p>在 manifest.xml 中 activity 中设置</p>
-      <p>android:windowSoftInputMode="adjustPan"</p>
+    /**
+     * 避免 输入法 面板 遮挡
+     * <p>在 manifest.xml 中 activity 中设置</p>
+     * <p>android:windowSoftInputMode="adjustPan"</p>
      */
-
     private static Context getContext() {
-        return CommonConfig.getInstance().getContext();
+        return CommonConfig.getContext();
     }
 
     /**

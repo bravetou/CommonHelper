@@ -8,8 +8,8 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 
 import com.brave.common.CommonConfig;
-import com.brave.common.helper.permission.PermissionsHelper;
 import com.brave.common.utils.network.NetworkUtils;
+import com.brave.common.utils.permission.PermissionsUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -25,7 +25,7 @@ public final class DeviceUtils {
     }
 
     private static Context getContext() {
-        return CommonConfig.getInstance().getContext();
+        return CommonConfig.getContext();
     }
 
     /**
@@ -61,14 +61,14 @@ public final class DeviceUtils {
      * 是否拥有读取手机信息权限
      */
     private static boolean hasReadPhoneStatePermission() {
-        return PermissionsHelper.getInstance().hasPermissions(Manifest.permission.READ_PHONE_STATE);
+        return PermissionsUtils.hasPermissions(Manifest.permission.READ_PHONE_STATE);
     }
 
     /**
      * 是否拥有修改手机信息权限
      */
     private static boolean hasModifyPhoneStatePermission() {
-        return PermissionsHelper.getInstance().hasPermissions(Manifest.permission.MODIFY_PHONE_STATE);
+        return PermissionsUtils.hasPermissions(Manifest.permission.MODIFY_PHONE_STATE);
     }
 
     /**

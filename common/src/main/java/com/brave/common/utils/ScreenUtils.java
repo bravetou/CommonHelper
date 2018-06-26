@@ -34,7 +34,7 @@ public final class ScreenUtils {
     }
 
     private static Context getContext() {
-        return CommonConfig.getInstance().getContext();
+        return CommonConfig.getContext();
     }
 
     private static Resources getResources() {

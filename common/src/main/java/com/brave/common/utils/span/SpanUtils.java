@@ -92,7 +92,7 @@ public class SpanUtils {
     }
 
     private Context getContext() {
-        return CommonConfig.getInstance().getContext();
+        return CommonConfig.getContext();
     }
 
     private Resources getResources() {

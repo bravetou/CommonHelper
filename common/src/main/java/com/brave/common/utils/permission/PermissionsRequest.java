@@ -1,4 +1,4 @@
-package com.brave.common.helper.permission;
+package com.brave.common.utils.permission;
 
 import android.app.Activity;
 import android.os.Build;
@@ -19,37 +19,33 @@ public class PermissionsRequest {
 
     private List<String> tempPermissions; // 临时请求权限集合
 
-    public static PermissionsRequest newInstance() {
-        return new PermissionsRequest();
+    public static PermissionsRequest newInstance(@NonNull Activity activity) {
+        return new PermissionsRequest(activity);
     }
 
-    private PermissionsRequest() {
+    private PermissionsRequest(@NonNull Activity activity) {
         if (null == tempPermissions) {
             tempPermissions = new ArrayList<>();
         }
-    }
-
-    public PermissionsRequest with(@NonNull Activity activity) {
         this.activity = activity;
-        return this;
     }
 
-    public PermissionsRequest with(@NonNull android.app.Fragment fragment) {
-        this.activity = fragment.getActivity();
-        return this;
-    }
-
-    public PermissionsRequest with(@NonNull android.support.v4.app.Fragment fragment) {
-        this.activity = fragment.getActivity();
-        return this;
-    }
-
-    public PermissionsRequest setRequestCode(int requestCode) {
+    /**
+     * 加载权限请求码
+     *
+     * @param requestCode
+     */
+    public PermissionsRequest loadCode(@NonNull int requestCode) {
         this.requestCode = requestCode;
         return this;
     }
 
-    public PermissionsRequest addPermissions(String... permissions) {
+    /**
+     * 添加请求权限
+     *
+     * @param permissions
+     */
+    public PermissionsRequest add(@NonNull String... permissions) {
         int count = null == permissions ? 0 : permissions.length;
         for (int i = 0; i < count; i++) {
             tempPermissions.add(permissions[i]);
@@ -57,7 +53,12 @@ public class PermissionsRequest {
         return this;
     }
 
-    public PermissionsRequest removePermissions(String... permissions) {
+    /**
+     * 删除请求权限
+     *
+     * @param permissions
+     */
+    public PermissionsRequest remove(@NonNull String... permissions) {
         int count = null == permissions ? 0 : permissions.length;
         for (int i = 0; i < count; i++) {
             tempPermissions.remove(permissions[i]);
@@ -65,7 +66,10 @@ public class PermissionsRequest {
         return this;
     }
 
-    public PermissionsRequest clearPermissions() {
+    /**
+     * 清空请求权限
+     */
+    public PermissionsRequest clear() {
         if (null != tempPermissions) {
             tempPermissions.clear();
         }
@@ -76,26 +80,34 @@ public class PermissionsRequest {
      * 执行权限请求
      */
     public PermissionsRequest execute() {
-        if (null == activity) {
-            throw new RuntimeException("Request permission on an empty object.");
-        }
-        int count = null == tempPermissions ? 0 : tempPermissions.size();
-        permissions = new String[count];
-        for (int i = 0; i < count; i++) {
-            permissions[i] = tempPermissions.get(i);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.requestPermissions(permissions, requestCode);
+        if (PermissionsUtils.isNeedRegister()) {
+            if (null == activity) {
+                throw new RuntimeException("Request permission on an empty object.");
+            }
+            int count = null == tempPermissions ? 0 : tempPermissions.size();
+            permissions = new String[count];
+            for (int i = 0; i < count; i++) {
+                permissions[i] = tempPermissions.get(i);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.requestPermissions(permissions, requestCode);
+            }
         }
         // 请求完成之后 清空临时权限
-        clearPermissions();
+        clear();
         return this;
     }
 
+    /**
+     * 获取权限请求码
+     */
     public int getRequestCode() {
         return requestCode;
     }
 
+    /**
+     * 获取权限请求数组
+     */
     public String[] getPermissions() {
         return permissions;
     }

@@ -15,38 +15,8 @@ public final class DensityUtils {
     }
 
     private static Context getContext() {
-        return CommonConfig.getInstance().getContext();
+        return CommonConfig.getContext();
     }
-
-    /**
-     * dp转px
-     */
-    //    public static float dp2px(float dpVal) {
-    //        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-    //                dpVal, getContext().getResources().getDisplayMetrics());
-    //    }
-
-    /**
-     * sp转px
-     */
-    //    public static float sp2px(float spVal) {
-    //        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
-    //                spVal, getContext().getResources().getDisplayMetrics());
-    //    }
-
-    /**
-     * px转dp
-     */
-    //    public static float px2dp(float pxVal) {
-    //        return (pxVal / getContext().getResources().getDisplayMetrics().density);
-    //    }
-
-    /**
-     * px转sp
-     */
-    //    public static float px2sp(float pxVal) {
-    //        return (pxVal / getContext().getResources().getDisplayMetrics().scaledDensity);
-    //    }
 
     /**
      * 根据手机的分辨率从 dip 的单位 转成为 px(像素)

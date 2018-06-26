@@ -770,7 +770,7 @@ public class FileUtils {
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public String getRealPath(@NonNull final Uri uri) {
-        Context context = CommonConfig.getInstance().getContext();
+        Context context = CommonConfig.getContext();
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {

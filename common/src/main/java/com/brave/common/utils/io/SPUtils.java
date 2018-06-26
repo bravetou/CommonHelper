@@ -23,7 +23,7 @@ public class SPUtils {
     private static final Map<String, SPUtils> utilsMap = new LinkedHashMap<>(); // 键值对储存 xml
 
     private Context getContext() {
-        return CommonConfig.getInstance().getContext();
+        return CommonConfig.getContext();
     }
 
     public static SPUtils getInstance() {

@@ -2,6 +2,9 @@ package com.brave.common.utils.cipher;
 
 import android.text.TextUtils;
 
+import com.brave.common.CommonConfig;
+
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -15,8 +18,12 @@ public final class MD5Utils {
         throw new RuntimeException("cannot be instantiated");
     }
 
+    private static Charset getDefaultCharset() {
+        return CommonConfig.getDefaultCharset();
+    }
+
     /**
-     * 32位 MD5加密 方法
+     * 32位
      */
     public static String encrypt(byte[] text) {
         try {
@@ -41,14 +48,14 @@ public final class MD5Utils {
     }
 
     /**
-     * 32位 MD5加密 方法
+     * 32位
      */
     public static String encrypt(String value) {
-        return encrypt(value.getBytes());
+        return encrypt(value.getBytes(getDefaultCharset()));
     }
 
     /**
-     * 16位 MD5加密 方法
+     * 16位
      */
     public static String encrypt16(byte[] text) {
         String encrypt = encrypt(text);
@@ -59,51 +66,9 @@ public final class MD5Utils {
     }
 
     /**
-     * 16位 MD5加密 方法
+     * 16位
      */
     public static String encrypt16(String value) {
-        return encrypt16(value.getBytes());
-    }
-
-    /**
-     * 32位 MD5加密 方法（密文加密）
-     *
-     * @param pwd  密码
-     * @param text 明文
-     */
-    public static String encrypt(String pwd, String text) {
-        // 文本32位加密
-        String encrypt = encrypt(text);
-        if (TextUtils.isEmpty(encrypt)) {
-            return "";
-        }
-        if (TextUtils.isEmpty(pwd)) {
-            pwd = "fountain";
-        }
-        // 密码 + 32位加密的文本 再次加密
-        encrypt = encrypt(pwd + encrypt);
-        // 明文 + （密码 + 32位加密的文本） 再次32位加密
-        return encrypt(text + encrypt);
-    }
-
-    /**
-     * 16位 MD5加密 方法（密文加密）
-     *
-     * @param pwd  密码
-     * @param text 明文
-     */
-    public static String encrypt16(String pwd, String text) {
-        // 文本16位加密
-        String encrypt = encrypt16(text);
-        if (TextUtils.isEmpty(encrypt)) {
-            return "";
-        }
-        if (TextUtils.isEmpty(pwd)) {
-            pwd = "fountain";
-        }
-        // 密码 + 16位加密的文本 再次加密
-        encrypt = encrypt16(pwd + encrypt);
-        // 明文 + （密码 + 16位加密的文本） 再次32位加密
-        return encrypt16(text + encrypt);
+        return encrypt16(value.getBytes(getDefaultCharset()));
     }
 }

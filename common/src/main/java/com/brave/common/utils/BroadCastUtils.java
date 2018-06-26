@@ -1,4 +1,4 @@
-package com.brave.common.helper;
+package com.brave.common.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -16,30 +16,30 @@ import java.util.Map;
 /**
  * <b>author</b> ： brave tou <br/>
  * <b>createTime</b> ： 2018/6/9 <br/>
- * <b>description</b> ： Broadcast 管理帮助类
+ * <b>description</b> ： Broadcast 管理工具类
  */
-public class BroadCastHelper {
+public class BroadCastUtils {
     public static final String DATA = "BROAD_CAST_HELPER_BRAVE"; // 广播数据传递键
-    private volatile static BroadCastHelper mInstance;
+    private volatile static BroadCastUtils mInstance;
     private Map<String, Map<String, BroadcastReceiver>> receiverMap;
 
-    public static BroadCastHelper getInstance() {
+    public static BroadCastUtils getInstance() {
         if (null == mInstance) {
-            synchronized (BroadCastHelper.class) {
+            synchronized (BroadCastUtils.class) {
                 if (null == mInstance) {
-                    mInstance = new BroadCastHelper();
+                    mInstance = new BroadCastUtils();
                 }
             }
         }
         return mInstance;
     }
 
-    private BroadCastHelper() {
+    private BroadCastUtils() {
         receiverMap = new LinkedHashMap<>();
     }
 
-    public Context getContext() {
-        return CommonConfig.getInstance().getContext();
+    private Context getContext() {
+        return CommonConfig.getContext();
     }
 
     /**
@@ -108,7 +108,7 @@ public class BroadCastHelper {
         } else {
             map = new LinkedHashMap<>();
         }
-        String name = receiver.getClass().getName(); // com.brave.common.helper.BroadCastHelper$BroadcastReceiver
+        String name = receiver.getClass().getName(); // com.brave.common.utils.BroadCastUtils$BroadcastReceiver
         // 获取当前广播所在类的全类名
         String qualifiedName = name.substring(0, name.indexOf("$"));
         if (map.containsKey(qualifiedName)) {

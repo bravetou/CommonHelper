@@ -17,7 +17,7 @@ public final class AppUtils {
     }
 
     private static Context getContext() {
-        return CommonConfig.getInstance().getContext();
+        return CommonConfig.getContext();
     }
 
     /**

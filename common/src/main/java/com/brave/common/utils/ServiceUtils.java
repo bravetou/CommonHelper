@@ -25,7 +25,7 @@ public final class ServiceUtils {
     }
 
     private static Context getContext() {
-        return CommonConfig.getInstance().getContext();
+        return CommonConfig.getContext();
     }
 
     /**

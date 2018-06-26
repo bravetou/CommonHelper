@@ -1,44 +1,38 @@
-package com.brave.common.helper.permission;
+package com.brave.common.utils.permission;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
 
 import com.brave.common.CommonConfig;
 
 /**
  * <b>author</b> ： brave tou <br/>
  * <b>createTime</b> ： 2018/6/9 <br/>
- * <b>description</b> ： Permissions 管理帮助类
+ * <b>description</b> ： Permissions 管理工具类
  */
-public class PermissionsHelper {
-    private Context context;
-
-    private static class SingletonHolder {
-        private volatile static PermissionsHelper mInstance = new PermissionsHelper();
+public final class PermissionsUtils {
+    private PermissionsUtils() {
+        throw new RuntimeException("cannot be instantiated");
     }
 
-    public static PermissionsHelper getInstance() {
-        return SingletonHolder.mInstance;
+    private static Context getContext() {
+        return CommonConfig.getContext();
     }
 
-    private PermissionsHelper() {
+    public static PermissionsRequest with(@NonNull Activity activity) {
+        return PermissionsRequest.newInstance(activity);
     }
 
-    private Context getContext() {
-        if (null != context) {
-            return context;
-        }
-        return CommonConfig.getInstance().getContext();
+    public static PermissionsRequest with(@NonNull Fragment fragment) {
+        return PermissionsRequest.newInstance(fragment.getActivity());
     }
 
-    /**
-     * 如果调用此方法则 {@link #getContext()} 中使用的 {@link CommonConfig#getContext()} 失效<br/>
-     * 如需再次使用 {@link CommonConfig#getContext()} 需要置空 null
-     */
-    public PermissionsHelper with(Context context) {
-        this.context = context;
-        return this;
+    public static PermissionsRequest with(@NonNull android.support.v4.app.Fragment fragment) {
+        return PermissionsRequest.newInstance(fragment.getActivity());
     }
 
     /**
@@ -46,7 +40,7 @@ public class PermissionsHelper {
      *
      * @return true ： 需要 <br/> false ： 反之
      */
-    public boolean isNeedRegister() {
+    public static boolean isNeedRegister() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return true;
         }
@@ -58,7 +52,7 @@ public class PermissionsHelper {
      *
      * @return true ： 已拥有 <br/> false ： 反之
      */
-    public boolean hasPermissions(String... permissions) {
+    public static boolean hasPermissions(String... permissions) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int count = null == permissions ? 0 : permissions.length;
             for (int i = 0; i < count; i++) {
@@ -76,7 +70,7 @@ public class PermissionsHelper {
      *
      * @return true ： 已拥有 <br/> false ： 反之
      */
-    public boolean hasPermissions(int... grantResults) {
+    public static boolean hasPermissions(int... grantResults) {
         int count = null == grantResults ? 0 : grantResults.length;
         for (int i = 0; i < count; i++) {
             if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
@@ -84,12 +78,5 @@ public class PermissionsHelper {
             }
         }
         return true;
-    }
-
-    /**
-     * 新建权限请求类
-     */
-    public PermissionsRequest getPermissionsRequest() {
-        return PermissionsRequest.newInstance();
     }
 }
