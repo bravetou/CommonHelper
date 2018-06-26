@@ -2,15 +2,14 @@
 
 ---
 
-集合项目常用帮助类、工具类、各大组件基类等...
-只为了更加 >>> 方便项目的使用
+Bring together some common Android help and tool classes to make project development easier.
 
 <br/>
 
 #### 导入
 
 ```java
-    implementation 'com.brave.common:common:1.0.1'
+    implementation 'com.brave.common:common:1.0.2'
 ```
 
 
@@ -19,7 +18,7 @@
 ---
 
  - 实现 Activity、Fragment、Dialog、Application 基类
- - 支持动态权限管理与请求
+ - 支持 动态权限管理与请求
  - 支持 Activity栈 管理
  - 支持 动态广播 管理
  - 支持 对称加密、MD5加密等

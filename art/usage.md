@@ -9,7 +9,7 @@
  - 在Application的onCreate方法中调用
  
 ```java
-CommonConfig.getInstance().initialize(this);
+    CommonConfig.init(this);
 ```
 
  - 直接继承至[CommonApplication](/common/src/main/java/com/brave/common/base/CommonApplication.java)
@@ -55,88 +55,6 @@ CommonConfig.getInstance().initialize(this);
     
     // 移动光标到末尾
     moveCursorToEnd();
-```
-
-```java
-    // 是否需要注册权限
-    PermissionsHelper.getInstance()
-                    .isNeedRegister();
-
-    // 判断权限是否存在
-    PermissionsHelper.getInstance()
-                    .hasPermissions();
-    
-    // 动态请求权限
-    PermissionsHelper.getInstance()
-                    .getPermissionsRequest()
-                    .with(this)
-                    .addPermissions()
-                    .execute();
-```
-
-```java
-    // 获取存活Activity集合
-    ActivityHelper.getInstance().getStackActivitys();
-    
-    // 获取存活栈顶Activity
-    ActivityHelper.getInstance().getStackTopActivity();
-    
-    // 判断是否存在Activity
-    ActivityHelper.getInstance().hasActivity(this);
-    
-    // 添加 Activity
-    ActivityHelper.getInstance().addActivity(this);
-    
-    // 移除并杀死 Activity
-    ActivityHelper.getInstance().removeActivity(this);
-    
-    // 清空并杀死 Activity
-    ActivityHelper.getInstance().clearActivity();
-    
-    // 保持并清空杀死其他 Activity
-    ActivityHelper.getInstance().keepActivity(this);
-    
-    // 回退 num 个Activity
-    ActivityHelper.getInstance().rollbackActivity(1);
-```
-
-```java
-    // 发送广播
-    BroadCastHelper.getInstance().sendBroadcast("", "");
-     
-    // 添加广播监听
-    BroadCastHelper.getInstance().addAction("", BroadcastReceiver);
-    
-    // 注销广播
-    BroadCastHelper.getInstance().destroy(this, "");
-```
-
-```java
-    // 对称加密工具
-    CipherUtils.newInstance()
-            .setAlgorithm("AES")
-            .setMode(CipherMode.ECB)
-            .setPadding(CipherPadding.PKCS5)
-            .setText("")
-            .setSecretKey("")
-            .decrypt();
-
-    // MD5 原始加密
-    MD5Utils.encrypt("");
-    
-    // MD5 多重加密（可以更具需求定义）
-    MD5Utils.encrypt(pwd, "");
-```
-
-```java
-    // 增（改）
-    SPUtils.getInstance().put("", "");
-    
-    // 删
-    SPUtils.getInstance().remove("");
-    
-    // 查
-    SPUtils.getInstance().getString("");
 ```
 
 #### 其他工具
