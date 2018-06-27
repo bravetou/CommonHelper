@@ -57,6 +57,9 @@
     moveCursorToEnd();
 ```
 
+[HomeActivity](/app/src/main/java/com/brave/employ/ui/home/HomeActivity.java)有一些简单使用。
+
+
 #### 其他工具
 
 ---
@@ -113,4 +116,4 @@
 
 ---
 
-优秀的框架还有更多，我只是推荐了一些一般项目必用的框架..
+常用的、优秀的框架远不止这些，我只是推荐了一些一般项目必用的框架。
