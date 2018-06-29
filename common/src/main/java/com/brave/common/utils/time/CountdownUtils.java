@@ -105,9 +105,9 @@ public class CountdownUtils {
         /**
          * 倒计时间隔时间调用
          *
-         * @param passedTime 过去的时间
+         * @param remainingTime 余下的时间
          */
-        void onTick(long passedTime);
+        void onTick(long remainingTime);
 
         /**
          * 倒计时完成
