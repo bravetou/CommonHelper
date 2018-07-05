@@ -20,9 +20,9 @@ public abstract class DialogBuilder {
         setCancelable(cancelable);
     }
 
-    public DialogBuilder setCancelable(boolean cancelable) {
+    public <C extends DialogBuilder> C setCancelable(boolean cancelable) {
         this.cancelable = cancelable;
-        return this;
+        return (C) this;
     }
 
     public Activity getActivity() {

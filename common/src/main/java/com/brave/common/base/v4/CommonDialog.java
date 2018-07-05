@@ -27,7 +27,6 @@ import com.brave.common.base.ViewCommonUtils;
  */
 public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragment {
     protected FragmentActivity activity;
-    protected boolean cancelable;
 
     protected CommonDialog(B builder) {
         if (null == builder.getActivity()) {
@@ -38,7 +37,6 @@ public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragme
         } else {
             throw new RuntimeException("Class please inherit to FragmentActivity.");
         }
-        this.cancelable = builder.isCancelable();
     }
 
     @Override

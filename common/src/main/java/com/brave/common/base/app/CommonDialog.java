@@ -26,14 +26,12 @@ import com.brave.common.base.ViewCommonUtils;
  */
 public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragment {
     protected Activity activity;
-    protected boolean cancelable;
 
     public CommonDialog(B builder) {
         if (null == builder.getActivity()) {
             throw new RuntimeException("null pointer.");
         }
         this.activity = builder.getActivity();
-        this.cancelable = builder.isCancelable();
     }
 
     @Override
