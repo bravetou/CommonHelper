@@ -129,8 +129,6 @@ public class CountdownUtils {
         if (null != countDownTimer) {
             countDownTimer.cancel();
         }
-        if (null != countDownListener) {
-            countDownTimer = null;
-        }
+        countDownListener = null;
     }
 }
