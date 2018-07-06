@@ -11,7 +11,7 @@ Bring together some common Android help and tool classes to make project develop
 ---
 
 ```java
-    implementation 'com.brave.common:common:1.0.7'
+    implementation 'com.brave.common:common:1.0.8'
 ```
 
 <br/>
