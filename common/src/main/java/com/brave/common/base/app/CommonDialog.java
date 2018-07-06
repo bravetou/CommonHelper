@@ -81,6 +81,13 @@ public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragme
     protected abstract int loadLayoutResId();
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // 手动回收 对Activity的引用，防止内存泄漏
+        activity = null;
+    }
+
+    @Override
     public void show(FragmentManager manager, String tag) {
         // super.show(manager, tag);
         Fragment fragment = manager.findFragmentByTag(tag); // 查询 FragmentManager 中是否有对应TAG的Fragment存在

@@ -32,4 +32,11 @@ public abstract class DialogBuilder {
     public boolean isCancelable() {
         return cancelable;
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        // 手动回收 对Activity的引用，防止内存泄漏
+        activity = null;
+    }
 }
