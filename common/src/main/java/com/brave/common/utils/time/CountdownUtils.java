@@ -122,4 +122,15 @@ public class CountdownUtils {
     public long getTotalTime() {
         return totalTime;
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        if (null != countDownTimer) {
+            countDownTimer.cancel();
+        }
+        if (null != countDownListener) {
+            countDownTimer = null;
+        }
+    }
 }
