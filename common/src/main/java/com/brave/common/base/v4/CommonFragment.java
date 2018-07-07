@@ -23,7 +23,7 @@ public abstract class CommonFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // super.onCreateView(inflater, container, savedInstanceState) => null
-        View rootView = inflater.inflate(loadLayoutResId(), container);
+        View rootView = inflater.inflate(loadLayoutResId(), container, false);
         return rootView;
     }
 

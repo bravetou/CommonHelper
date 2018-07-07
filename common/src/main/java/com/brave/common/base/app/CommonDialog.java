@@ -70,7 +70,7 @@ public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragme
         // dialogFragment设置背景 为透明
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         // 载入需要显示的布局
-        View rootView = inflater.inflate(loadLayoutResId(), container);
+        View rootView = inflater.inflate(loadLayoutResId(), container, false);
         return rootView;
     }
 
