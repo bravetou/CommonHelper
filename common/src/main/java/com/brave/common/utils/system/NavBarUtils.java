@@ -47,6 +47,14 @@ public final class NavBarUtils {
         clear(dialog.getWindow());
     }
 
+    public static void setGradient(@NonNull Window window, View rootView) {
+        SystemBarUtils.setNavBarGradient(window, rootView);
+    }
+
+    public static void setGradient(@NonNull Activity activity) {
+        SystemBarUtils.setNavBarGradient(activity);
+    }
+
     public static void setColor(@NonNull Activity activity, @ColorInt int color) {
         SystemBarUtils.setNavBarColor(activity, color);
     }

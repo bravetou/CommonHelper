@@ -2,6 +2,7 @@ package com.brave.common.utils.system;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -155,12 +156,14 @@ public final class SystemBarUtils {
      * @param rootView 系统栏占位（null 则为不占位）
      */
     private static void setSystemBarColor(@NonNull Window window, boolean isStatusBar, boolean isNavBar,
-                                          @ColorInt int color, View rootView) {
+                                          boolean isFits, @ColorInt int color, View rootView) {
         clearSystemFlags(window, isStatusBar, isNavBar);
         if (null != rootView) {
             if (rootView instanceof ViewGroup) {
                 ViewGroup viewGroup = (ViewGroup) rootView;
-                viewGroup.setFitsSystemWindows(true);
+                // 分割 是否需要保存 原状态栏&导航栏 的高度
+                viewGroup.setFitsSystemWindows(isFits);
+                // 分割 完成
                 viewGroup.setClipToPadding(true);
             }
         }
@@ -186,8 +189,92 @@ public final class SystemBarUtils {
      * @param color    颜色
      * @param rootView 系统栏占位（null 则为不占位）
      */
+    public static void setSystemBarColor(@NonNull Window window, boolean isFits, @ColorInt int color, View rootView) {
+        setSystemBarColor(window, true, true, isFits, color, rootView);
+    }
+
+    /**
+     * 设置 顶部状态栏 颜色
+     *
+     * @param color 颜色
+     */
+    public static void setStatusBarColor(@NonNull Window window, boolean isFits, @ColorInt int color, View rootView) {
+        setSystemBarColor(window, true, false, isFits, color, rootView);
+    }
+
+    /**
+     * 设置 底部导航栏 颜色
+     *
+     * @param color 颜色
+     */
+    public static void setNavBarColor(@NonNull Window window, boolean isFits, @ColorInt int color, View rootView) {
+        setSystemBarColor(window, false, true, isFits, color, rootView);
+    }
+
+    /**
+     * 设置 系统栏 渐变（渐变部分需要自行操作）
+     *
+     * @param rootView 系统栏占位（null 则为不占位）
+     */
+    public static void setSystemBarGradient(@NonNull Window window, View rootView) {
+        setSystemBarColor(window, false, Color.TRANSPARENT, rootView);
+    }
+
+    /**
+     * 设置 状态栏 渐变（渐变部分需要自行操作）
+     */
+    public static void setStatusBarGradient(@NonNull Window window, View rootView) {
+        setStatusBarColor(window, false, Color.TRANSPARENT, rootView);
+    }
+
+    /**
+     * 设置 导航栏 渐变（渐变部分需要自行操作）
+     */
+    public static void setNavBarGradient(@NonNull Window window, View rootView) {
+        setNavBarColor(window, false, Color.TRANSPARENT, rootView);
+    }
+
+    /**
+     * 设置 系统栏 渐变（渐变部分需要自行操作）
+     */
+    public static void setSystemBarGradient(@NonNull Activity activity) {
+        ViewGroup group = activity.findViewById(android.R.id.content);
+        if (group.getChildCount() < 1) {
+            return;
+        }
+        setSystemBarGradient(activity.getWindow(), group.getChildAt(0));
+    }
+
+    /**
+     * 设置 状态栏 渐变（渐变部分需要自行操作）
+     */
+    public static void setStatusBarGradient(@NonNull Activity activity) {
+        ViewGroup group = activity.findViewById(android.R.id.content);
+        if (group.getChildCount() < 1) {
+            return;
+        }
+        setStatusBarGradient(activity.getWindow(), group.getChildAt(0));
+    }
+
+    /**
+     * 设置 导航栏 渐变（渐变部分需要自行操作）
+     */
+    public static void setNavBarGradient(@NonNull Activity activity) {
+        ViewGroup group = activity.findViewById(android.R.id.content);
+        if (group.getChildCount() < 1) {
+            return;
+        }
+        setNavBarGradient(activity.getWindow(), group.getChildAt(0));
+    }
+
+    /**
+     * 设置 系统栏 颜色（包含 状态栏、导航栏）
+     *
+     * @param color    颜色
+     * @param rootView 系统栏占位（null 则为不占位）
+     */
     public static void setSystemBarColor(@NonNull Window window, @ColorInt int color, View rootView) {
-        setSystemBarColor(window, true, true, color, rootView);
+        setSystemBarColor(window, true, color, rootView);
     }
 
     /**
@@ -196,7 +283,7 @@ public final class SystemBarUtils {
      * @param color 颜色
      */
     public static void setStatusBarColor(@NonNull Window window, @ColorInt int color, View rootView) {
-        setSystemBarColor(window, true, false, color, rootView);
+        setStatusBarColor(window, true, color, rootView);
     }
 
     /**
@@ -205,7 +292,7 @@ public final class SystemBarUtils {
      * @param color 颜色
      */
     public static void setNavBarColor(@NonNull Window window, @ColorInt int color, View rootView) {
-        setSystemBarColor(window, false, true, color, rootView);
+        setNavBarColor(window, true, color, rootView);
     }
 
     /**

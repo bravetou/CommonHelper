@@ -13,7 +13,7 @@ android {
     buildTypes {
         debug {
             // 为 Debug 版本 增加 后缀，使其能在同一手机上转载两个App
-            applicationIdSuffix ".debug"
+            // applicationIdSuffix ".debug"
         }
         release {
             minifyEnabled false
@@ -32,4 +32,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':common')
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
 }

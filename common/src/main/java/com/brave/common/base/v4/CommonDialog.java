@@ -87,9 +87,9 @@ public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragme
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         // 手动回收 对Activity的引用，防止内存泄漏
         activity = null;
+        super.onDestroyView();
     }
 
     @Override

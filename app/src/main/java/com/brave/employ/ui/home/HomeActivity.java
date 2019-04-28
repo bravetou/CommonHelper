@@ -56,9 +56,12 @@ public class HomeActivity extends CommonActivity {
         // 测试权限
         testPermissions();
         // 设置状态栏颜色
-        StatusBarUtils.setColor(this, Color.BLUE);
+        StatusBarUtils.setColor(this, Color.TRANSPARENT);
         // 设置导航栏颜色
         NavBarUtils.setColor(this, Color.RED);
+
+        // SystemBarUtils.setSystemBarGradient(this);
+        // SystemBarUtils.setStatusBarGradient(this);
     }
 
     private void testPermissions() {

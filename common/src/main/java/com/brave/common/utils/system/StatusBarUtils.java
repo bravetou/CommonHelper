@@ -52,6 +52,14 @@ public final class StatusBarUtils {
         clear(dialog.getWindow());
     }
 
+    public static void setGradient(@NonNull Window window, View rootView) {
+        SystemBarUtils.setStatusBarGradient(window, rootView);
+    }
+
+    public static void setGradient(@NonNull Activity activity) {
+        SystemBarUtils.setStatusBarGradient(activity);
+    }
+
     public static void setColor(@NonNull Activity activity, @ColorInt int color) {
         SystemBarUtils.setStatusBarColor(activity, color);
     }
