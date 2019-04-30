@@ -2,9 +2,9 @@ package com.brave.common.base.v4;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import android.view.View;
 import android.widget.EditText;
 

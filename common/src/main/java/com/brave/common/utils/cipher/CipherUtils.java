@@ -1,6 +1,6 @@
 package com.brave.common.utils.cipher;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.brave.common.CommonConfig;
 

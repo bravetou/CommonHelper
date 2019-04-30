@@ -1,7 +1,7 @@
 package com.brave.common.base;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;

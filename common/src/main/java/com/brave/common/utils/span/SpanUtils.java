@@ -3,7 +3,7 @@ package com.brave.common.utils.span;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.Spannable;
 
 import com.brave.common.CommonConfig;
@@ -44,7 +44,7 @@ public final class SpanUtils {
         return SpanGenerates.newInstance(fragment.getActivity());
     }
 
-    public static SpanGenerates with(@NonNull android.support.v4.app.Fragment fragment) {
+    public static SpanGenerates with(@NonNull androidx.fragment.app.Fragment fragment) {
         return SpanGenerates.newInstance(fragment.getActivity());
     }
 }

@@ -1,6 +1,6 @@
 package com.brave.common.base;
 
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 import com.brave.common.CommonConfig;
 

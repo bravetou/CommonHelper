@@ -2,11 +2,11 @@ package com.brave.common.utils.system;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.FloatRange;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 import android.view.View;
 import android.view.Window;
 

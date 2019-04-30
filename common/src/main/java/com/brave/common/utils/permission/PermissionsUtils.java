@@ -5,7 +5,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.brave.common.CommonConfig;
 
@@ -31,7 +31,7 @@ public final class PermissionsUtils {
         return PermissionsRequest.newInstance(fragment.getActivity());
     }
 
-    public static PermissionsRequest with(@NonNull android.support.v4.app.Fragment fragment) {
+    public static PermissionsRequest with(@NonNull androidx.fragment.app.Fragment fragment) {
         return PermissionsRequest.newInstance(fragment.getActivity());
     }
 
