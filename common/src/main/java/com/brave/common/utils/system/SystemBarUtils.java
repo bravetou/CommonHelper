@@ -6,17 +6,18 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.FloatRange;
-import androidx.annotation.IntRange;
-import androidx.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 
 import com.brave.common.utils.ColorUtils;
 import com.brave.common.utils.ScreenUtils;
@@ -781,5 +782,75 @@ public final class SystemBarUtils {
      */
     public static void showSystemBar(@NonNull Dialog dialog) {
         showSystemBar(dialog.getWindow());
+    }
+
+    /**
+     * 独立一个低度耦合的系统栏目操作方法
+     *
+     * @param window      视窗
+     * @param rootView    根布局
+     * @param isStatusBar 需要操作状态栏
+     * @param isNavBar    需要操作导航栏
+     * @param isFits      状态栏是否占位
+     * @param color       颜色
+     * @param defColor    默认颜色
+     */
+    public static void setSysbarColor(@NonNull Window window, @NonNull View rootView,
+                                      boolean isStatusBar, boolean isNavBar, boolean isFits,
+                                      @ColorInt int color, @ColorInt int defColor) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT ||
+                null == rootView || color == defColor) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); // draw
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); // status
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION); // navigation
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN // 全屏显示，但状态栏不会被隐藏覆盖，状态栏依然可见，Activity 顶端布局部分会被状态遮住
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE; // 防止系统栏隐藏时内容区域大小发生变化
+            if (isNavBar) {
+                option = option | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION; // 隐藏导航栏
+            }
+            if (color == Color.WHITE) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    option = option | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                } else {
+                    color = defColor;
+                }
+            } else {
+                option = option | View.SYSTEM_UI_FLAG_VISIBLE;
+            }
+            window.getDecorView().setSystemUiVisibility(option);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (isStatusBar) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            }
+            if (isNavBar) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            }
+        }
+        if (null != rootView) {
+            if (rootView instanceof ViewGroup) {
+                ViewGroup viewGroup = (ViewGroup) rootView;
+                // 状态栏是否需要占位
+                viewGroup.setFitsSystemWindows(isFits);
+                // 分割 完成
+                viewGroup.setClipToPadding(true);
+            }
+        }
+        if (isStatusBar) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(color);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                getStatusBar(window).setBackgroundColor(color);
+            }
+        }
+        if (isNavBar) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setNavigationBarColor(color);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                getNavBar(window).setBackgroundColor(color);
+            }
+        }
     }
 }
