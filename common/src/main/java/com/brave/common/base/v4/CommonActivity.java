@@ -2,11 +2,12 @@ package com.brave.common.base.v4;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.brave.common.base.ViewCommonUtils;
 
@@ -15,7 +16,7 @@ import com.brave.common.base.ViewCommonUtils;
  * <b>createTime</b> ： 2018/6/8 <br/>
  * <b>description</b> ：v4 下常用 Activity
  */
-public abstract class CommonActivity extends FragmentActivity {
+public abstract class CommonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public abstract class CommonActivity extends FragmentActivity {
         return this;
     }
 
-    public FragmentActivity getActivity() {
+    public AppCompatActivity getActivity() {
         return this;
     }
 

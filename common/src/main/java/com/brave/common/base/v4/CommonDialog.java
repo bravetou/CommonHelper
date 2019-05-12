@@ -3,19 +3,21 @@ package com.brave.common.base.v4;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.brave.common.base.DialogBuilder;
 import com.brave.common.base.ViewCommonUtils;
@@ -25,7 +27,7 @@ import com.brave.common.base.ViewCommonUtils;
  * <b>createTime</b> ： 2018/6/8 <br/>
  * <b>description</b> ：v4 下常用 Dialog
  */
-public abstract class CommonDialog<B extends DialogBuilder> extends DialogFragment {
+public abstract class CommonDialog<B extends DialogBuilder> extends AppCompatDialogFragment {
     protected FragmentActivity activity;
 
     protected CommonDialog(B builder) {
