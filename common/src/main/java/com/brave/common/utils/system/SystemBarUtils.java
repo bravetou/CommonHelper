@@ -792,11 +792,13 @@ public final class SystemBarUtils {
      * @param isStatusBar 需要操作状态栏
      * @param isNavBar    需要操作导航栏
      * @param isFits      状态栏是否占位
+     * @param isBlack     状态栏字体是否为黑色
      * @param color       颜色
      * @param defColor    默认颜色
      */
     public static void setSysbarColor(@NonNull Window window, @NonNull View rootView,
-                                      boolean isStatusBar, boolean isNavBar, boolean isFits,
+                                      boolean isStatusBar, boolean isNavBar,
+                                      boolean isFits, boolean isBlack,
                                       @ColorInt int color, @ColorInt int defColor) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT ||
                 null == rootView || color == defColor) {
@@ -811,7 +813,7 @@ public final class SystemBarUtils {
             if (isNavBar) {
                 option = option | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION; // 隐藏导航栏
             }
-            if (color == Color.WHITE) {
+            if (isBlack) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     option = option | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
                 } else {
