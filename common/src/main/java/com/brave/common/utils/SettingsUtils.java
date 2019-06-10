@@ -2,6 +2,7 @@ package com.brave.common.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.provider.Settings;
 
 import com.brave.common.CommonConfig;
@@ -20,67 +21,88 @@ public final class SettingsUtils {
         return CommonConfig.getContext();
     }
 
+    private static final Intent getIntent() {
+        return new Intent()
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    }
+
     /**
      * 跳转到系统设置界面
      */
     public static void openSettings() {
-        final Intent intent = new Intent(Settings.ACTION_SETTINGS);
-        getContext().startActivity(intent);
+        getContext().startActivity(getIntent()
+                .setAction(Settings.ACTION_SETTINGS));
     }
 
     /**
      * 跳转到 Wifi 列表设置界面
      */
     public static void openWifiSettings() {
-        final Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
-        getContext().startActivity(intent);
+        getContext().startActivity(getIntent()
+                .setAction(Settings.ACTION_WIFI_SETTINGS));
     }
 
     /**
      * 跳转到移动网络设置界面
      */
     public static void openDataSettings() {
-        final Intent intent = new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS);
-        getContext().startActivity(intent);
+        getContext().startActivity(getIntent()
+                .setAction(Settings.ACTION_DATA_ROAMING_SETTINGS));
     }
 
     /**
      * 跳转到飞行模式设置界面
      */
     public static void openAirplaneSettings() {
-        final Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
-        getContext().startActivity(intent);
+        getContext().startActivity(getIntent()
+                .setAction(Settings.ACTION_AIRPLANE_MODE_SETTINGS));
     }
 
     /**
      * 跳转到蓝牙设置界面
      */
     public static void openBluetoothSettings() {
-        final Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
-        getContext().startActivity(intent);
+        getContext().startActivity(getIntent()
+                .setAction(Settings.ACTION_BLUETOOTH_SETTINGS));
     }
 
     /**
      * 跳转到 NFC 设置界面
      */
     public static void openNfcSettings() {
-        final Intent intent = new Intent(Settings.ACTION_NFC_SETTINGS);
-        getContext().startActivity(intent);
+        getContext().startActivity(getIntent()
+                .setAction(Settings.ACTION_NFC_SETTINGS));
     }
 
     /**
      * 跳转到 NFC 共享设置界面
      */
     public static void openNfcShareSettings() {
-        final Intent intent = new Intent(Settings.ACTION_NFCSHARING_SETTINGS);
-        getContext().startActivity(intent);
+        getContext().startActivity(getIntent()
+                .setAction(Settings.ACTION_NFCSHARING_SETTINGS));
     }
 
     /**
      * 跳转位置服务界面
      */
     public static void openGpsSettings() {
-        final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        getContext().startActivity(intent);
+        getContext().startActivity(getIntent()
+                .setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+    }
+
+    /**
+     * 跳转到指定应用包下的详情界面
+     */
+    public static void openAppDetails(String packageName) {
+        getContext().startActivity(getIntent()
+                .setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                .setData(Uri.fromParts("package", packageName, null)));
+    }
+
+    /**
+     * 跳转到本应用包下的详情界面
+     */
+    public static void openAppDetails() {
+        openAppDetails(CommonConfig.getApplication().getPackageName());
     }
 }

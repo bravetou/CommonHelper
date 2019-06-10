@@ -3,11 +3,14 @@ package com.brave.common.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.brave.common.CommonConfig;
 
@@ -37,13 +40,32 @@ public final class KeyboardUtils {
         return (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
+    private static View getEditText(View v) {
+        if (v instanceof EditText) {
+            return v;
+        }
+        if (v instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) v;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                View view = getEditText(viewGroup.getChildAt(i));
+                if (null != view) {
+                    return view;
+                }
+            }
+        }
+        return null;
+    }
+
     /**
      * 动态显示软键盘
      */
     public static void showSoftInput(@Nullable Activity activity) {
         View view = activity.getCurrentFocus();
-        if (view == null) {
-            view = new View(activity);
+        if (null == view) {
+            view = getEditText(activity.findViewById(android.R.id.content));
+        }
+        if (null == view) {
+            return;
         }
         InputMethodManager imm = getInputMethodManager();
         if (imm == null) {
@@ -87,13 +109,14 @@ public final class KeyboardUtils {
     public static void hideSoftInput(@Nullable Activity activity) {
         View view = activity.getCurrentFocus();
         if (view == null) {
-            view = new View(activity);
+            return;
         }
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = getInputMethodManager();
         if (imm == null) {
             return;
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        view.clearFocus();
     }
 
     /**
@@ -107,6 +130,7 @@ public final class KeyboardUtils {
             return;
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        view.clearFocus();
     }
 
     /**
@@ -117,7 +141,7 @@ public final class KeyboardUtils {
     public static boolean isSoftInputShow(@NonNull Activity activity) {
         View view = activity.getWindow().peekDecorView();
         if (view != null) {
-            InputMethodManager inputmanger = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            InputMethodManager inputmanger = getInputMethodManager();
             return inputmanger.isActive() && activity.getWindow().getCurrentFocus() != null;
         }
         return false;
