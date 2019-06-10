@@ -5,6 +5,12 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven {
+            url "https://jitpack.io"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
@@ -13,7 +19,7 @@ buildscript {
         // in the individual module build.gradle files
 
         // https://mvnrepository.com/artifact/com.jfrog.bintray.gradle/gradle-bintray-plugin
-        classpath group: 'com.jfrog.bintray.gradle', name: 'gradle-bintray-plugin', version: '1.8.0'
+        classpath group: 'com.jfrog.bintray.gradle', name: 'gradle-bintray-plugin', version: '1.8.4'
         // https://mvnrepository.com/artifact/com.github.dcendents/android-maven-gradle-plugin
         classpath group: 'com.github.dcendents', name: 'android-maven-gradle-plugin', version: '2.1'
     }
@@ -23,6 +29,12 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven {
+            url "https://jitpack.io"
+        }
     }
 }
 
